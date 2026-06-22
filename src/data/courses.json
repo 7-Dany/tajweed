@@ -1,0 +1,73 @@
+{
+  "teacher": {
+    "id": "teacher-1",
+    "name": "الشيخ تنين",
+    "email": "teacher@tajweed.example",
+    "bio": "معلّم تجويد متخصص في أحكام المدّ ومخارج الحروف."
+  },
+  "courses": [
+    {
+      "id": "course-tajweed-rules",
+      "slug": "tajweed-rules",
+      "title": "أحكام التجويد",
+      "description": "دورة تعليمية في أحكام التجويد: المدود الطبيعية والفرعية، وتمارين نطق الحروف المتقاربة.",
+      "teacherId": "teacher-1",
+      "chapters": [
+        {
+          "id": "chapter-madd",
+          "title": "المدود في التجويد",
+          "order": 1,
+          "lessons": [
+            {
+              "id": "lesson-madd-rules",
+              "slug": "madd-rules",
+              "title": "أحكام المد الطبيعي والفرعي",
+              "description": "حروف المدّ الثلاثة، شروطها، المدّ الطبيعي والفرعي بسبب الهمزة، مع أمثلة قرآنية مُلوَّنة.",
+              "contentKey": "madd-rules",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "id": "chapter-letter-practice",
+          "title": "تمارين نطق الحروف",
+          "order": 2,
+          "lessons": [
+            {
+              "id": "lesson-letter-practice",
+              "slug": "letter-practice",
+              "title": "تمييز الحاء والخاء",
+              "description": "كلماتٌ ذات معنى وكلماتٌ تدريبية لتمييز مخرجَي الحاء والخاء المتقاربَين.",
+              "contentKey": "letter-practice",
+              "order": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "course-nun-sakinah",
+      "slug": "nun-sakinah-rules",
+      "title": "أحكام النون الساكنة والتنوين",
+      "description": "دراسة الأحكام الأربعة للنون الساكنة والتنوين: الإظهار والإدغام والإقلاب والإخفاء.",
+      "teacherId": "teacher-1",
+      "chapters": [
+        {
+          "id": "chapter-four-rules",
+          "title": "الأحكام الأربعة",
+          "order": 1,
+          "lessons": [
+            {
+              "id": "lesson-nun-overview",
+              "slug": "nun-sakinah-overview",
+              "title": "نظرة عامة على الأحكام",
+              "description": "تعريف بأحكام النون الساكنة والتنوين الأربعة مع أمثلة قرآنية مُلوَّنة.",
+              "contentKey": "nun-sakinah",
+              "order": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
