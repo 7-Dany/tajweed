@@ -1,0 +1,2055 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+    <head>
+        <meta charset="UTF-8" />
+        <title>أحكام التجويد — المدود وتمارين النطق</title>
+
+        <!-- Only ONE font family (Amiri) — loads fast, has excellent Arabic cursive joining -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@500;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <style>
+            /* ============ Design Tokens — Cream Scholarly ============ */
+            :root {
+                --bg: #fbf7ee;
+                --bg-subtle: #f5efe0;
+                --card: #fffefa;
+                --border: #e8dfc8;
+                --border-strong: #d4c7a6;
+
+                --fg: #2c1810;
+                --fg-muted: #5c4a33;
+                --fg-subtle: #8a7656;
+
+                --primary: #0f5132;
+                --primary-fg: #ffffff;
+                --primary-soft: #c9e5d5;
+                --primary-tint: #eaf6ee;
+
+                --accent: #b45309;
+                --accent-soft: #fce9c8;
+
+                --madd: #9f1239;
+                --madd-soft: #fce0e6;
+                --hamza: #15803d;
+                --hamza-soft: #dcfce7;
+
+                --letter-haa: #9f1239;
+                --letter-haa-bg: #fce0e6;
+                --letter-khaa: #92400e;
+                --letter-khaa-bg: #fef3c7;
+
+                --radius: 10px;
+                --radius-lg: 14px;
+                --radius-xl: 20px;
+
+                --shadow-sm: 0 1px 3px 0 rgb(60 40 20 / 0.08);
+                --shadow-md: 0 4px 6px -1px rgb(60 40 20 / 0.08);
+
+                --font-ar:
+                    "Amiri", "Traditional Arabic", "Noto Naskh Arabic", serif;
+                --font-num: "Inter", "Amiri", system-ui, sans-serif;
+                --deck-scale: 1;
+            }
+
+            @page {
+                size: 1280px 720px;
+                margin: 0 auto;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+                background: var(--bg);
+                font-family: var(--font-ar);
+                color: var(--fg);
+                -webkit-font-smoothing: antialiased;
+                font-feature-settings:
+                    "kern" 1,
+                    "liga" 1,
+                    "calt" 1,
+                    "rlig" 1,
+                    "rclt" 1;
+                text-rendering: optimizeLegibility;
+            }
+
+            /* ============ Slide Page ============ */
+            .page {
+                width: 1280px;
+                height: 720px;
+                position: relative;
+                background: var(--bg);
+                padding: 50px 64px;
+                overflow: hidden;
+                break-after: page;
+                page-break-after: always;
+                display: flex;
+                flex-direction: column;
+            }
+            .page:last-child {
+                break-after: auto;
+                page-break-after: auto;
+            }
+
+            /* ============ Slide Header ============ */
+            .slide-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding-bottom: 14px;
+                margin-bottom: 22px;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .slide-header__left {
+                display: flex;
+                align-items: center;
+                gap: 14px;
+            }
+
+            .slide-num {
+                display: grid;
+                place-items: center;
+                width: 40px;
+                height: 40px;
+                border-radius: var(--radius);
+                background: var(--primary-tint);
+                border: 1px solid var(--primary-soft);
+                color: var(--primary);
+                font-family: var(--font-num);
+                font-weight: 700;
+                font-size: 1.05rem;
+            }
+
+            .slide-title {
+                font-size: 1.55rem;
+                font-weight: 700;
+                color: var(--fg);
+                margin: 0;
+                line-height: 1.3;
+            }
+
+            .slide-eyebrow {
+                font-size: 0.85rem;
+                font-weight: 700;
+                color: var(--primary);
+                margin: 0 0 3px;
+            }
+
+            .slide-pageno {
+                font-family: var(--font-num);
+                font-size: 0.85rem;
+                color: var(--fg-subtle);
+                font-weight: 500;
+            }
+
+            /* ============ Cover Slide ============ */
+            .cover {
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .cover__frame {
+                position: absolute;
+                inset: 32px;
+                border: 1px solid var(--border-strong);
+                border-radius: var(--radius-xl);
+                pointer-events: none;
+            }
+
+            .cover__frame::before,
+            .cover__frame::after {
+                content: "";
+                position: absolute;
+                width: 56px;
+                height: 56px;
+                border: 2px solid var(--accent);
+            }
+            .cover__frame::before {
+                top: -1px;
+                right: -1px;
+                border-left: none;
+                border-bottom: none;
+                border-radius: 0 var(--radius-xl) 0 0;
+            }
+            .cover__frame::after {
+                bottom: -1px;
+                left: -1px;
+                border-right: none;
+                border-top: none;
+                border-radius: 0 0 0 var(--radius-xl);
+            }
+
+            .cover__eyebrow {
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                font-size: 0.95rem;
+                font-weight: 700;
+                color: var(--primary);
+                background: var(--primary-tint);
+                border: 1px solid var(--primary-soft);
+                padding: 8px 18px;
+                border-radius: 999px;
+                margin-bottom: 32px;
+            }
+            .cover__eyebrow svg {
+                width: 16px;
+                height: 16px;
+            }
+
+            .cover__title {
+                font-size: 4.2rem;
+                font-weight: 700;
+                color: var(--fg);
+                margin: 0 0 18px;
+                line-height: 1.15;
+            }
+
+            .cover__rule {
+                width: 110px;
+                height: 3px;
+                background: var(--accent);
+                margin: 0 auto 24px;
+                border-radius: 2px;
+            }
+
+            .cover__subtitle {
+                font-size: 1.35rem;
+                color: var(--fg-muted);
+                margin: 0 0 36px;
+                font-weight: 400;
+            }
+
+            .cover__meta {
+                display: flex;
+                gap: 12px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .cover__chip {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                font-size: 0.9rem;
+                font-weight: 400;
+                color: var(--fg-muted);
+                background: var(--card);
+                border: 1px solid var(--border);
+                padding: 7px 15px;
+                border-radius: 999px;
+            }
+
+            .cover__chip-dot {
+                width: 9px;
+                height: 9px;
+                border-radius: 50%;
+            }
+            .cover__chip-dot--madd {
+                background: var(--madd);
+            }
+            .cover__chip-dot--hamza {
+                background: var(--hamza);
+            }
+            .cover__chip-dot--haa {
+                background: var(--letter-haa);
+            }
+            .cover__chip-dot--khaa {
+                background: var(--letter-khaa);
+            }
+            .cover__chip-dot--primary {
+                background: var(--primary);
+            }
+
+            /* ============ Section Divider ============ */
+            .divider {
+                align-items: center;
+                justify-content: center;
+                background: linear-gradient(
+                    135deg,
+                    var(--primary) 0%,
+                    #0a3d26 100%
+                );
+                color: var(--primary-fg);
+            }
+
+            .divider__inner {
+                display: flex;
+                align-items: center;
+                gap: 56px;
+                max-width: 900px;
+            }
+
+            .divider__num {
+                font-family: var(--font-num);
+                font-size: 8.5rem;
+                font-weight: 700;
+                color: var(--accent);
+                line-height: 1;
+            }
+
+            .divider__text {
+                text-align: right;
+            }
+
+            .divider__eyebrow {
+                font-size: 1rem;
+                color: rgba(255, 255, 255, 0.65);
+                margin: 0 0 10px;
+                font-weight: 400;
+            }
+
+            .divider__title {
+                font-size: 3rem;
+                font-weight: 700;
+                color: #ffffff;
+                margin: 0 0 14px;
+                line-height: 1.2;
+            }
+
+            .divider__rule {
+                width: 70px;
+                height: 3px;
+                background: var(--accent);
+                margin-left: auto;
+                border-radius: 2px;
+            }
+
+            .divider__desc {
+                font-size: 1.1rem;
+                color: rgba(255, 255, 255, 0.75);
+                margin: 18px 0 0;
+                max-width: 36ch;
+                margin-left: auto;
+            }
+
+            /* ============ Letter Cards ============ */
+            .letters-row {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 26px;
+                margin: 20px 0;
+            }
+
+            .letter-card {
+                background: var(--card);
+                border: 1px solid var(--border);
+                border-radius: var(--radius-lg);
+                padding: 28px 22px;
+                text-align: center;
+                box-shadow: var(--shadow-sm);
+            }
+
+            .letter-card__glyph {
+                font-size: 5rem;
+                font-weight: 700;
+                color: var(--primary);
+                line-height: 1;
+                margin-bottom: 12px;
+            }
+
+            .letter-card__label {
+                font-size: 1.1rem;
+                color: var(--fg);
+                font-weight: 700;
+                margin-bottom: 5px;
+            }
+
+            .letter-card__hint {
+                font-size: 0.88rem;
+                color: var(--fg-subtle);
+            }
+
+            /* ============ Conditions ============ */
+            .conditions {
+                display: grid;
+                gap: 12px;
+                margin: 18px 0;
+            }
+
+            .condition {
+                display: flex;
+                align-items: center;
+                gap: 18px;
+                background: var(--card);
+                border: 1px solid var(--border);
+                border-radius: var(--radius);
+                padding: 16px 22px;
+                box-shadow: var(--shadow-sm);
+            }
+
+            .condition__glyph {
+                font-size: 2.4rem;
+                font-weight: 700;
+                color: var(--primary);
+                width: 56px;
+                text-align: center;
+                flex-shrink: 0;
+            }
+
+            .condition__text {
+                font-size: 1.1rem;
+                color: var(--fg);
+                line-height: 1.6;
+            }
+
+            .condition__text b {
+                color: var(--primary);
+                font-weight: 700;
+            }
+
+            /* ============ Callout ============ */
+            .callout {
+                display: flex;
+                align-items: center;
+                gap: 14px;
+                background: var(--accent-soft);
+                border: 1px solid #f0d89a;
+                border-right: 5px solid var(--accent);
+                padding: 14px 22px;
+                border-radius: var(--radius);
+                margin: 18px 0;
+                color: #6b3e0a;
+                font-size: 1.05rem;
+            }
+
+            .callout--info {
+                background: var(--primary-tint);
+                border-color: var(--primary-soft);
+                border-right-color: var(--primary);
+                color: #0a3d26;
+            }
+
+            .callout__icon {
+                flex-shrink: 0;
+                width: 22px;
+                height: 22px;
+                color: var(--accent);
+            }
+            .callout--info .callout__icon {
+                color: var(--primary);
+            }
+            .callout b {
+                color: inherit;
+                font-weight: 700;
+            }
+
+            /* Emphasis inside Arabic body text — uses COLOR, not font-weight change.
+   A font-weight change mid-word creates a font-run boundary in the PDF
+   renderer and breaks Arabic cursive joining. */
+            .em {
+                color: var(--primary);
+                font-weight: 400;
+            }
+
+            /* ============ Example Grid ============ */
+            .examples-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 16px;
+                margin: 8px 0;
+            }
+
+            .example {
+                background: var(--bg-subtle);
+                border: 1px solid var(--border);
+                border-radius: var(--radius);
+                padding: 24px 16px;
+                text-align: center;
+                font-size: 2.2rem;
+                font-weight: 700;
+                color: var(--fg);
+                line-height: 1.4;
+                position: relative;
+                overflow: hidden;
+                min-height: 100px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .example::after {
+                content: "";
+                position: absolute;
+                inset: auto 0 0 0;
+                height: 3px;
+                background: linear-gradient(
+                    90deg,
+                    var(--madd) 0%,
+                    var(--madd) 50%,
+                    var(--hamza) 50%,
+                    var(--hamza) 100%
+                );
+            }
+            .example--single::after {
+                background: var(--madd);
+            }
+
+            /* ============ Inline token highlights ============
+   CRITICAL — Arabic cursive joining preservation:
+   Browsers (Chromium/WebKit) do NOT carry text-shaping context across inline
+   element boundaries (WebKit bug 6148). Any <span> wrapping an Arabic letter
+   forces that letter into its ISOLATED form, severing cursive connections.
+
+   TWO-PART FIX:
+   1. HTML: insert ZWJ (U+200D) around span boundaries — but ONLY where
+      Arabic joining rules permit a connection:
+      • Right-joining letters (ا د ذ ر ز و ء ة ى) connect to PREVIOUS only.
+        ZWJ added BEFORE span, NEVER AFTER.
+      • Dual-joining letters (ب ت ث ج ح خ س ش ص ض ط ظ ع غ ف ق ك ل م ن ه ي)
+        connect to both sides. ZWJ added on both sides when adjacent letters exist.
+      • Diacritics (harakat) after </span> belong to the highlighted letter
+        and are moved INSIDE the span so they attach correctly.
+   2. CSS: COLOR-ONLY highlighting. Backgrounds, padding, and box-shadow all
+      extend outward and overlap with neighboring glyphs when the letter is in
+      medial form (with connecting tails). Color-only has zero spatial footprint. */
+            .madd {
+                color: var(--madd);
+                font-weight: inherit;
+            }
+
+            .hamza {
+                color: var(--hamza);
+                font-weight: inherit;
+            }
+
+            .haa {
+                color: var(--letter-haa);
+                font-weight: inherit;
+            }
+
+            .khaa {
+                color: var(--letter-khaa);
+                font-weight: inherit;
+            }
+
+            .madd,
+            .hamza,
+            .haa,
+            .khaa {
+                display: inline;
+                font-synthesis-weight: none;
+            }
+
+            /* ============ Symbol Display ============ */
+            .symbol-display {
+                display: flex;
+                align-items: center;
+                gap: 32px;
+                background: var(--primary-tint);
+                border: 1px solid var(--primary-soft);
+                border-radius: var(--radius-lg);
+                padding: 34px 42px;
+                margin: 14px 0;
+            }
+
+            .symbol-display__glyph {
+                font-size: 5.5rem;
+                color: var(--primary);
+                line-height: 1;
+                font-weight: 700;
+            }
+
+            .symbol-display__caption {
+                color: var(--fg-muted);
+                font-size: 1.05rem;
+                line-height: 1.7;
+                max-width: 40ch;
+            }
+            .symbol-display__caption b {
+                color: var(--primary);
+                font-weight: 700;
+            }
+
+            /* ============ Comparison ============ */
+            .comparison {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 22px;
+                margin: 8px 0;
+            }
+
+            .compare-card {
+                background: var(--card);
+                border: 1px solid var(--border);
+                border-radius: var(--radius-lg);
+                padding: 24px 26px;
+                box-shadow: var(--shadow-sm);
+                position: relative;
+                overflow: hidden;
+            }
+
+            .compare-card::before {
+                content: "";
+                position: absolute;
+                inset: 0 0 auto 0;
+                height: 4px;
+                background: var(--primary);
+            }
+            .compare-card--accent::before {
+                background: var(--accent);
+            }
+
+            .compare-card__label {
+                display: inline-block;
+                font-size: 0.8rem;
+                font-weight: 700;
+                color: var(--primary);
+                background: var(--primary-tint);
+                border: 1px solid var(--primary-soft);
+                padding: 4px 12px;
+                border-radius: 999px;
+                margin-bottom: 12px;
+            }
+            .compare-card--accent .compare-card__label {
+                color: var(--accent);
+                background: var(--accent-soft);
+                border-color: #f0d89a;
+            }
+
+            .compare-card__title {
+                font-size: 1.4rem;
+                font-weight: 700;
+                color: var(--fg);
+                margin: 0 0 10px;
+            }
+
+            .compare-card__desc {
+                color: var(--fg-muted);
+                font-size: 0.98rem;
+                margin: 0 0 16px;
+                line-height: 1.7;
+            }
+            .compare-card__desc b {
+                color: var(--primary);
+                font-weight: 700;
+            }
+            .compare-card--accent .compare-card__desc b {
+                color: var(--accent);
+            }
+
+            .compare-card__example {
+                font-size: 1.7rem;
+                font-weight: 700;
+                color: var(--fg);
+                background: var(--bg-subtle);
+                border: 1px solid var(--border);
+                border-radius: var(--radius);
+                padding: 12px 16px;
+                text-align: center;
+                line-height: 1.5;
+            }
+
+            /* ============ Summary Table ============ */
+            .table-wrap {
+                border: 1px solid var(--border);
+                border-radius: var(--radius-lg);
+                overflow: hidden;
+                margin: 8px 0;
+                background: var(--card);
+                box-shadow: var(--shadow-sm);
+            }
+
+            .summary-table {
+                width: 100%;
+                border-collapse: collapse;
+                text-align: right;
+                font-size: 1.05rem;
+            }
+
+            .summary-table thead th {
+                background: var(--primary);
+                color: var(--primary-fg);
+                font-weight: 700;
+                padding: 16px 22px;
+                text-align: right;
+                font-size: 1rem;
+            }
+
+            .summary-table tbody td {
+                padding: 18px 22px;
+                border-bottom: 1px solid var(--border);
+                color: var(--fg-muted);
+            }
+
+            .summary-table tbody tr:last-child td {
+                border-bottom: none;
+            }
+            .summary-table tbody td:first-child {
+                font-weight: 700;
+                color: var(--fg);
+            }
+
+            .badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                font-family: var(--font-num);
+                font-size: 0.92rem;
+                font-weight: 700;
+                padding: 5px 13px;
+                border-radius: 999px;
+                background: var(--primary-tint);
+                color: var(--primary);
+                border: 1px solid var(--primary-soft);
+                white-space: nowrap;
+            }
+
+            .badge--gold {
+                background: var(--accent-soft);
+                color: var(--accent);
+                border-color: #f0d89a;
+            }
+
+            /* ============ Word Tiles ============ */
+            .words-grid {
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                gap: 14px;
+                margin: 6px 0;
+                flex: 1;
+                align-content: center;
+            }
+
+            .word-tile {
+                background: var(--card);
+                border: 1px solid var(--border);
+                border-radius: var(--radius);
+                padding: 16px 10px;
+                text-align: center;
+                font-size: 1.9rem;
+                font-weight: 700;
+                color: var(--fg);
+                position: relative;
+                overflow: hidden;
+                box-shadow: var(--shadow-sm);
+                min-height: 84px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .word-tile::before {
+                content: "";
+                position: absolute;
+                inset: 0 0 auto 0;
+                height: 3px;
+                background: linear-gradient(
+                    90deg,
+                    var(--letter-haa) 0%,
+                    var(--letter-haa) 50%,
+                    var(--letter-khaa) 50%,
+                    var(--letter-khaa) 100%
+                );
+                opacity: 0.6;
+            }
+
+            /* ============ Legend ============ */
+            .legend-row {
+                display: flex;
+                gap: 12px;
+                justify-content: center;
+                flex-wrap: wrap;
+                margin-top: 14px;
+                padding-top: 14px;
+                border-top: 1px dashed var(--border-strong);
+            }
+
+            .legend-chip {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                font-size: 0.92rem;
+                color: var(--fg-muted);
+                background: var(--card);
+                border: 1px solid var(--border);
+                padding: 6px 13px;
+                border-radius: 999px;
+                box-shadow: var(--shadow-sm);
+            }
+
+            .legend-chip__dot {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+            }
+            .legend-chip__dot--haa {
+                background: var(--letter-haa);
+            }
+            .legend-chip__dot--khaa {
+                background: var(--letter-khaa);
+            }
+            .legend-chip__dot--madd {
+                background: var(--madd);
+            }
+            .legend-chip__dot--hamza {
+                background: var(--hamza);
+            }
+
+            /* ============ Closing ============ */
+            .closing {
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .closing__title {
+                font-size: 2.8rem;
+                font-weight: 700;
+                color: var(--fg);
+                margin: 0 0 16px;
+            }
+
+            .closing__rule {
+                width: 90px;
+                height: 3px;
+                background: var(--accent);
+                margin: 0 auto 22px;
+                border-radius: 2px;
+            }
+
+            .closing__text {
+                font-size: 2rem;
+                color: var(--primary);
+                font-weight: 700;
+                margin: 0 0 12px;
+            }
+
+            .closing__sub {
+                font-size: 1.05rem;
+                color: var(--fg-muted);
+                margin: 0;
+            }
+
+            /* ============ Slide Body ============ */
+            .slide-body {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .mini-heading {
+                font-size: 1.1rem;
+                font-weight: 700;
+                color: var(--fg);
+                margin: 0 0 12px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                justify-content: center;
+            }
+
+            .mini-heading::before {
+                content: "";
+                width: 4px;
+                height: 20px;
+                background: var(--primary);
+                border-radius: 2px;
+            }
+
+            /* ============ Causes cards ============ */
+            .causes-row {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 18px;
+                margin: 6px 0 14px;
+            }
+
+            .cause-card {
+                background: var(--card);
+                border: 1px solid var(--border);
+                border-radius: var(--radius);
+                padding: 20px 24px;
+                text-align: center;
+                box-shadow: var(--shadow-sm);
+            }
+
+            .cause-card__glyph {
+                font-size: 2.4rem;
+                font-weight: 700;
+                color: var(--primary);
+                margin-bottom: 6px;
+                line-height: 1;
+            }
+
+            .cause-card__label {
+                font-size: 1.05rem;
+                font-weight: 700;
+                color: var(--fg);
+            }
+
+            /* ============ Screen Slide Deck ============ */
+            @media screen {
+                html,
+                body {
+                    width: 100%;
+                    height: 100%;
+                    overflow: hidden;
+                }
+
+                body {
+                    min-height: 100svh;
+                }
+
+                .page {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    margin: 0;
+                    border: 0;
+                    border-radius: 0;
+                    box-shadow: none;
+                    opacity: 0;
+                    pointer-events: none;
+                    transform: translate(-50%, -50%) scale(var(--deck-scale));
+                    transform-origin: center;
+                    transition:
+                        transform 560ms cubic-bezier(0.22, 1, 0.36, 1),
+                        opacity 280ms ease;
+                    will-change: transform, opacity;
+                    break-after: auto;
+                    page-break-after: auto;
+                }
+
+                .page:first-of-type,
+                .page.is-active {
+                    z-index: 2;
+                    opacity: 1;
+                    pointer-events: auto;
+                    transform: translate(-50%, -50%) scale(var(--deck-scale));
+                }
+
+                body.deck-enhanced .page:first-of-type:not(.is-active) {
+                    opacity: 0;
+                    pointer-events: none;
+                }
+
+                .page.is-before {
+                    z-index: 1;
+                    opacity: 0;
+                    transform: translate(calc(-50% + min(10vw, 96px)), -50%)
+                        scale(var(--deck-scale));
+                }
+
+                .page.is-after {
+                    z-index: 1;
+                    opacity: 0;
+                    transform: translate(calc(-50% - min(10vw, 96px)), -50%)
+                        scale(var(--deck-scale));
+                }
+
+                .deck-controls {
+                    position: fixed;
+                    z-index: 20;
+                    inset: 0;
+                    pointer-events: none;
+                }
+
+                .deck-button {
+                    display: grid;
+                    place-items: center;
+                    position: absolute;
+                    top: 50%;
+                    width: 42px;
+                    height: 42px;
+                    border: 1px solid var(--primary-soft);
+                    border-radius: 50%;
+                    background: rgb(234 246 238 / 0.9);
+                    color: var(--primary);
+                    font-family: var(--font-num);
+                    font-size: 1.55rem;
+                    font-weight: 700;
+                    line-height: 1;
+                    cursor: pointer;
+                    pointer-events: auto;
+                    transform: translateY(-50%);
+                    backdrop-filter: blur(10px);
+                    box-shadow: var(--shadow-sm);
+                }
+
+                .deck-button[data-slide-prev] {
+                    right: max(14px, env(safe-area-inset-right));
+                }
+
+                .deck-button[data-slide-next] {
+                    left: max(14px, env(safe-area-inset-left));
+                }
+
+                .deck-button:hover:not(:disabled),
+                .deck-button:focus-visible:not(:disabled) {
+                    background: var(--primary);
+                    color: var(--primary-fg);
+                    outline: none;
+                }
+
+                .deck-button:disabled {
+                    cursor: default;
+                    opacity: 0.38;
+                }
+
+                .deck-status {
+                    position: absolute;
+                    right: max(14px, env(safe-area-inset-right));
+                    bottom: max(12px, env(safe-area-inset-bottom));
+                    min-width: 58px;
+                    padding: 5px 10px;
+                    border: 1px solid var(--border);
+                    border-radius: 999px;
+                    background: rgb(255 254 250 / 0.72);
+                    text-align: center;
+                    color: var(--fg-muted);
+                    font-family: var(--font-num);
+                    font-size: 0.78rem;
+                    font-weight: 700;
+                    backdrop-filter: blur(10px);
+                }
+            }
+
+            @media screen and (max-width: 640px) {
+                .deck-button {
+                    width: 36px;
+                    height: 36px;
+                    font-size: 1.2rem;
+                }
+
+                .deck-button[data-slide-prev] {
+                    right: max(8px, env(safe-area-inset-right));
+                }
+
+                .deck-button[data-slide-next] {
+                    left: max(8px, env(safe-area-inset-left));
+                }
+
+                .deck-status {
+                    right: 50%;
+                    bottom: max(8px, env(safe-area-inset-bottom));
+                    min-width: 50px;
+                    padding: 4px 8px;
+                    font-size: 0.72rem;
+                    transform: translateX(50%);
+                }
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                .page {
+                    transition: opacity 120ms ease;
+                }
+            }
+
+            @media print {
+                html,
+                body {
+                    width: auto;
+                    height: auto;
+                    overflow: visible;
+                }
+
+                .page {
+                    position: relative;
+                    top: auto;
+                    left: auto;
+                    margin: 0;
+                    border: 0;
+                    border-radius: 0;
+                    box-shadow: none;
+                    opacity: 1;
+                    pointer-events: auto;
+                    transform: none;
+                    break-after: page;
+                    page-break-after: always;
+                }
+
+                .page:last-of-type {
+                    break-after: auto;
+                    page-break-after: auto;
+                }
+
+                .deck-controls {
+                    display: none;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- ============ SLIDE 1: COVER ============ -->
+        <section class="page cover">
+            <div class="cover__frame"></div>
+
+            <span class="cover__eyebrow">
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                    <path
+                        d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+                    />
+                </svg>
+                علم التجويد
+            </span>
+
+            <h1 class="cover__title">أحكام التجويد</h1>
+            <div class="cover__rule"></div>
+            <p class="cover__subtitle">المدود في التجويد وتمارين نطق الحروف</p>
+
+            <div class="cover__meta">
+                <span class="cover__chip"
+                    ><span
+                        class="cover__chip-dot cover__chip-dot--primary"
+                    ></span>
+                    المد الطبيعي</span
+                >
+                <span class="cover__chip"
+                    ><span class="cover__chip-dot cover__chip-dot--madd"></span>
+                    حرف المد</span
+                >
+                <span class="cover__chip"
+                    ><span
+                        class="cover__chip-dot cover__chip-dot--hamza"
+                    ></span>
+                    الهمزة</span
+                >
+                <span class="cover__chip"
+                    ><span class="cover__chip-dot cover__chip-dot--haa"></span>
+                    الحاء</span
+                >
+                <span class="cover__chip"
+                    ><span class="cover__chip-dot cover__chip-dot--khaa"></span>
+                    الخاء</span
+                >
+            </div>
+        </section>
+
+        <!-- ============ SLIDE 2: SECTION DIVIDER (Part 1) ============ -->
+        <section class="page divider">
+            <div class="divider__inner">
+                <div class="divider__num">١</div>
+                <div class="divider__text">
+                    <p class="divider__eyebrow">القسم الأول</p>
+                    <h2 class="divider__title">المدود في التجويد</h2>
+                    <div class="divider__rule"></div>
+                    <p class="divider__desc">
+                        أحكام المد الطبيعي والفرعي، مع الأمثلة القرآنية
+                        المُلوَّنة.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SLIDE 3: المد الطبيعي — حروف المد ============ -->
+        <section class="page">
+            <header class="slide-header">
+                <div class="slide-header__left">
+                    <div class="slide-num">٣</div>
+                    <div>
+                        <p class="slide-eyebrow">المد الطبيعي · ١</p>
+                        <h2 class="slide-title">حروف المد الثلاثة</h2>
+                    </div>
+                </div>
+                <span class="slide-pageno">3 / 14</span>
+            </header>
+
+            <div class="slide-body">
+                <p
+                    style="
+                        font-size: 1.12rem;
+                        color: var(--fg-muted);
+                        margin: 0 0 10px;
+                        text-align: center;
+                    "
+                >
+                    حروف المدّ ثلاثة، وهي أصل كل مدٍّ في القرآن الكريم:
+                </p>
+
+                <div class="letters-row">
+                    <div class="letter-card">
+                        <div class="letter-card__glyph">ا</div>
+                        <div class="letter-card__label">الألف</div>
+                        <div class="letter-card__hint">ساكنة، قبلها فتح</div>
+                    </div>
+                    <div class="letter-card">
+                        <div class="letter-card__glyph">و</div>
+                        <div class="letter-card__label">الواو</div>
+                        <div class="letter-card__hint">ساكنة، قبلها ضم</div>
+                    </div>
+                    <div class="letter-card">
+                        <div class="letter-card__glyph">ي</div>
+                        <div class="letter-card__label">الياء</div>
+                        <div class="letter-card__hint">ساكنة، قبلها كسر</div>
+                    </div>
+                </div>
+
+                <div class="callout callout--info" style="margin-top: 22px">
+                    <svg
+                        class="callout__icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 16v-4" />
+                        <path d="M12 8h.01" />
+                    </svg>
+                    <span
+                        >المد الطبيعي يُمدّ بمقدار
+                        <span class="em">حركتين</span> فقط — وهو الأصل الذي
+                        تُبنى عليه بقية أنواع المدّ.</span
+                    >
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SLIDE 4: المد الطبيعي — الشروط ============ -->
+        <section class="page">
+            <header class="slide-header">
+                <div class="slide-header__left">
+                    <div class="slide-num">٤</div>
+                    <div>
+                        <p class="slide-eyebrow">المد الطبيعي · ٢</p>
+                        <h2 class="slide-title">شروط حروف المد</h2>
+                    </div>
+                </div>
+                <span class="slide-pageno">4 / 14</span>
+            </header>
+
+            <div class="slide-body">
+                <p
+                    style="
+                        font-size: 1.08rem;
+                        color: var(--fg-muted);
+                        margin: 0 0 16px;
+                    "
+                >
+                    يشترط في كل حرف من حروف المدّ أن يكون ساكناً، ويكون الحرف
+                    الذي قبله مفتوحاً أو مضموناً أو مكسوراً بحسب نوعه:
+                </p>
+
+                <div class="conditions">
+                    <div class="condition">
+                        <div class="condition__glyph">ا</div>
+                        <div class="condition__text">
+                            الألف: تكون ساكنة، وقبلها حرف
+                            <span class="em">مفتوح</span>.
+                        </div>
+                    </div>
+                    <div class="condition">
+                        <div class="condition__glyph">و</div>
+                        <div class="condition__text">
+                            الواو: تكون ساكنة، وقبلها حرف
+                            <span class="em">مضموم</span>.
+                        </div>
+                    </div>
+                    <div class="condition">
+                        <div class="condition__glyph">ي</div>
+                        <div class="condition__text">
+                            الياء: تكون ساكنة، وقبلها حرف
+                            <span class="em">مكسور</span>.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <svg
+                        class="callout__icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M12 9v4" />
+                        <path d="M12 17h.01" />
+                        <path
+                            d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
+                        />
+                    </svg>
+                    <span
+                        >إن لم تتحقّق هذه الشروط، فلا تُعدّ الحروف مداً طبيعياً
+                        — بل حروف لينٍ أو حروف علة.</span
+                    >
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SLIDE 5: أمثلة المد الطبيعي ============ -->
+        <section class="page">
+            <header class="slide-header">
+                <div class="slide-header__left">
+                    <div class="slide-num">٥</div>
+                    <div>
+                        <p class="slide-eyebrow">المد الطبيعي · ٣</p>
+                        <h2 class="slide-title">أمثلة المد الطبيعي</h2>
+                    </div>
+                </div>
+                <span class="slide-pageno">5 / 14</span>
+            </header>
+
+            <div class="slide-body">
+                <div class="examples-grid" style="margin-bottom: 12px">
+                    <div class="example example--single">
+                        قَ&#8205;<span class="madd">&#8205;ا</span>لَ
+                    </div>
+                    <div class="example example--single">
+                        كَتَ&#8205;<span class="madd">&#8205;ا</span>ب
+                    </div>
+                    <div class="example example--single">
+                        يَقُ&#8205;<span class="madd">&#8205;و</span>لُ
+                    </div>
+                </div>
+                <p class="mini-heading">الأمثلة العُليا — الألف والواو</p>
+                <div class="examples-grid">
+                    <div class="example example--single">
+                        نُ&#8205;<span class="madd">&#8205;و</span>ر
+                    </div>
+                    <div class="example example--single">
+                        قِ&#8205;<span class="madd">&#8205;ي&#8205;</span>لَ
+                    </div>
+                    <div class="example example--single">
+                        كَرِ<span class="madd">ي&#8205;</span>&#8205;م
+                    </div>
+                </div>
+
+                <div class="legend-row">
+                    <span class="legend-chip"
+                        ><span
+                            class="legend-chip__dot legend-chip__dot--madd"
+                        ></span>
+                        حرف المد (يُمدّ حركتين)</span
+                    >
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SLIDE 6: المد الفرعي — السبب والعلامة ============ -->
+        <section class="page">
+            <header class="slide-header">
+                <div class="slide-header__left">
+                    <div class="slide-num">٦</div>
+                    <div>
+                        <p class="slide-eyebrow">المد الفرعي · ١</p>
+                        <h2 class="slide-title">سبب المد الفرعي وعلامته</h2>
+                    </div>
+                </div>
+                <span class="slide-pageno">6 / 14</span>
+            </header>
+
+            <div class="slide-body">
+                <p
+                    style="
+                        font-size: 1.08rem;
+                        color: var(--fg-muted);
+                        margin: 0 0 14px;
+                    "
+                >
+                    يكون المدّ الفرعي بسبب أحد الأمرين:
+                </p>
+
+                <div class="causes-row">
+                    <div class="cause-card">
+                        <div class="cause-card__glyph">ء</div>
+                        <div class="cause-card__label">الهمزة</div>
+                    </div>
+                    <div class="cause-card">
+                        <div class="cause-card__glyph">ْ</div>
+                        <div class="cause-card__label">السكون</div>
+                    </div>
+                </div>
+
+                <div class="symbol-display" style="margin-top: 14px">
+                    <div class="symbol-display__glyph">ٓ</div>
+                    <div class="symbol-display__caption">
+                        علامة المدّ في <span class="em">المصحف الشريف</span> —
+                        تُرسم فوق حرف المدّ لتدلّ على وجود مدٍّ زائدٍ على المدّ
+                        الطبيعي.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SLIDE 7: المد بسبب الهمزة — نوعان ============ -->
+        <section class="page">
+            <header class="slide-header">
+                <div class="slide-header__left">
+                    <div class="slide-num">٧</div>
+                    <div>
+                        <p class="slide-eyebrow">المد الفرعي · ٢</p>
+                        <h2 class="slide-title">المد بسبب الهمزة — نوعان</h2>
+                    </div>
+                </div>
+                <span class="slide-pageno">7 / 14</span>
+            </header>
+
+            <div class="slide-body">
+                <div class="comparison">
+                    <div class="compare-card">
+                        <span class="compare-card__label">واجب متصل</span>
+                        <h3 class="compare-card__title">المدّ الواجب المتصل</h3>
+                        <p class="compare-card__desc">
+                            حرف المدّ والهمزة في
+                            <span class="em">نفس الكلمة</span> — يجب مدّه أربع
+                            حركات.
+                        </p>
+                        <div class="compare-card__example">
+                            جَ‍<span class="madd">‍ا</span
+                            ><span class="hamza">ءَ</span>
+                        </div>
+                    </div>
+                    <div class="compare-card compare-card--accent">
+                        <span class="compare-card__label">جائز منفصل</span>
+                        <h3 class="compare-card__title">
+                            المدّ الجائز المنفصل
+                        </h3>
+                        <p class="compare-card__desc">
+                            حرف المدّ في كلمة، والهمزة في
+                            <span class="em" style="color: var(--accent)"
+                                >الكلمة التي بعدها</span
+                            >
+                            — يُمدّ أربع حركات.
+                        </p>
+                        <div class="compare-card__example">
+                            يَ‍<span class="madd">‍ا</span>
+                            <span class="hamza">أَ</span>يُّهَا
+                        </div>
+                    </div>
+                </div>
+
+                <div class="callout callout--info" style="margin-top: 16px">
+                    <svg
+                        class="callout__icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 16v-4" />
+                        <path d="M12 8h.01" />
+                    </svg>
+                    <span
+                        >للتبسيط: يُمدّ النوعان معاً بمقدار
+                        <span class="em">أربع حركات</span>.</span
+                    >
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SLIDE 8: المد الواجب المتصل — أمثلة ============ -->
+        <section class="page">
+            <header class="slide-header">
+                <div class="slide-header__left">
+                    <div class="slide-num">٨</div>
+                    <div>
+                        <p class="slide-eyebrow">المد الفرعي · ٣</p>
+                        <h2 class="slide-title">المدّ الواجب المتصل — أمثلة</h2>
+                    </div>
+                </div>
+                <span class="slide-pageno">8 / 14</span>
+            </header>
+
+            <div class="slide-body">
+                <p
+                    style="
+                        font-size: 1.04rem;
+                        color: var(--fg-muted);
+                        margin: 0 0 12px;
+                        text-align: center;
+                    "
+                >
+                    حرف المدّ والهمزة في نفس الكلمة — يُمدّ أربع حركات.
+                </p>
+
+                <div class="examples-grid" style="margin-bottom: 12px">
+                    <div class="example">
+                        جَ‍<span class="madd">‍ا</span
+                        ><span class="hamza">ءَ</span>
+                    </div>
+                    <div class="example">
+                        شَ‍<span class="madd">‍ا</span
+                        ><span class="hamza">ءَ</span>
+                    </div>
+                    <div class="example">
+                        سُ‍<span class="madd">‍و</span
+                        ><span class="hamza">ءَ</span>
+                    </div>
+                </div>
+
+                <div class="examples-grid">
+                    <div class="example">
+                        تَبُ‍<span class="madd">‍و</span
+                        ><span class="hamza">ءَ</span>
+                    </div>
+                    <div class="example">
+                        ﺟِ<span class="madd">ﻲ</span
+                        ><span class="hamza">ءَ</span>
+                    </div>
+                    <div class="example">
+                        هَنِ&#8205;<span class="madd">&#8205;ي&#8205;</span
+                        ><span class="hamza">ئًا</span>
+                    </div>
+                </div>
+
+                <div class="legend-row">
+                    <span class="legend-chip"
+                        ><span
+                            class="legend-chip__dot legend-chip__dot--madd"
+                        ></span>
+                        حرف المد</span
+                    >
+                    <span class="legend-chip"
+                        ><span
+                            class="legend-chip__dot legend-chip__dot--hamza"
+                        ></span>
+                        الهمزة</span
+                    >
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SLIDE 9: المد الجائز المنفصل — أمثلة ============ -->
+        <section class="page">
+            <header class="slide-header">
+                <div class="slide-header__left">
+                    <div class="slide-num">٩</div>
+                    <div>
+                        <p class="slide-eyebrow">المد الفرعي · ٤</p>
+                        <h2 class="slide-title">
+                            المدّ الجائز المنفصل — أمثلة
+                        </h2>
+                    </div>
+                </div>
+                <span class="slide-pageno">9 / 14</span>
+            </header>
+
+            <div class="slide-body">
+                <p
+                    style="
+                        font-size: 1.04rem;
+                        color: var(--fg-muted);
+                        margin: 0 0 12px;
+                        text-align: center;
+                    "
+                >
+                    حرف المدّ في آخر كلمة، والهمزة في أول الكلمة التي تليها.
+                </p>
+
+                <div class="examples-grid" style="margin-bottom: 12px">
+                    <div class="example">
+                        فِيهَ‍<span class="madd">‍ا</span>&nbsp;
+                        <span class="hamza">أَ</span>نْهَارٌ
+                    </div>
+                    <div class="example">
+                        يَ‍<span class="madd">‍ا</span>&nbsp;
+                        <span class="hamza">أَ</span>يُّهَا
+                    </div>
+                    <div class="example">
+                        قَالُ‍<span class="madd">‍وا</span>&nbsp;
+                        <span class="hamza">إِ</span>نَّا
+                    </div>
+                </div>
+
+                <div class="examples-grid">
+                    <div class="example">
+                        آمَنُ‍<span class="madd">‍وا</span>&nbsp;
+                        <span class="hamza">أَ</span>نْزَلْنَا
+                    </div>
+                    <div class="example">
+                        فِ‍<span class="madd">‍ي</span>&nbsp;
+                        <span class="hamza">أَ</span>نْفُسِكُمْ
+                    </div>
+                    <div class="example">
+                        إِنِّ‍<span class="madd">‍ي</span>&nbsp;
+                        <span class="hamza">أَ</span>عْلَمُ
+                    </div>
+                </div>
+
+                <div class="legend-row">
+                    <span class="legend-chip"
+                        ><span
+                            class="legend-chip__dot legend-chip__dot--madd"
+                        ></span>
+                        حرف المد</span
+                    >
+                    <span class="legend-chip"
+                        ><span
+                            class="legend-chip__dot legend-chip__dot--hamza"
+                        ></span>
+                        الهمزة</span
+                    >
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SLIDE 10: ملخص سريع ============ -->
+        <section class="page">
+            <header class="slide-header">
+                <div class="slide-header__left">
+                    <div class="slide-num">١٠</div>
+                    <div>
+                        <p class="slide-eyebrow">خلاصة</p>
+                        <h2 class="slide-title">ملخّص سريع — جدول المقارنة</h2>
+                    </div>
+                </div>
+                <span class="slide-pageno">10 / 14</span>
+            </header>
+
+            <div class="slide-body">
+                <p
+                    style="
+                        font-size: 1.08rem;
+                        color: var(--fg-muted);
+                        margin: 0 0 16px;
+                    "
+                >
+                    جدولٌ مختصر يُلخّص الأنواع الثلاثة مع أسبابها ومقاديرها:
+                </p>
+
+                <div class="table-wrap">
+                    <table class="summary-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 30%">النوع</th>
+                                <th style="width: 45%">السبب</th>
+                                <th style="width: 25%; text-align: center">
+                                    مقدار المد
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>المد الطبيعي</td>
+                                <td>لا همزة ولا سكون</td>
+                                <td style="text-align: center">
+                                    <span class="badge">حركتان</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>المد الواجب المتصل</td>
+                                <td>همزة بعد حرف المد في نفس الكلمة</td>
+                                <td style="text-align: center">
+                                    <span class="badge badge--gold"
+                                        >٤ حركات</span
+                                    >
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>المد الجائز المنفصل</td>
+                                <td>
+                                    حرف المد في كلمة، والهمزة في الكلمة التالية
+                                </td>
+                                <td style="text-align: center">
+                                    <span class="badge badge--gold"
+                                        >٤ حركات</span
+                                    >
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="callout callout--info" style="margin-top: 16px">
+                    <svg
+                        class="callout__icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 16v-4" />
+                        <path d="M12 8h.01" />
+                    </svg>
+                    <span
+                        >القاعدة الذهبية: المد الطبيعي
+                        <span class="em">حركتان</span>، والمدّ بسبب الهمزة
+                        <span class="em">أربع حركات</span>.</span
+                    >
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SLIDE 11: SECTION DIVIDER (Part 2) ============ -->
+        <section class="page divider">
+            <div class="divider__inner">
+                <div class="divider__num">٢</div>
+                <div class="divider__text">
+                    <p class="divider__eyebrow">القسم الثاني</p>
+                    <h2 class="divider__title">تمارين نطق الحروف</h2>
+                    <div class="divider__rule"></div>
+                    <p class="divider__desc">
+                        كلماتٌ ذات معنى وكلماتٌ تدريبية لتمييز الحاء والخاء.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SLIDE 12: كلمات ذات معنى ============ -->
+        <section class="page">
+            <header class="slide-header">
+                <div class="slide-header__left">
+                    <div class="slide-num">١٢</div>
+                    <div>
+                        <p class="slide-eyebrow">التمارين · ١</p>
+                        <h2 class="slide-title">كلماتٌ ذات معنى</h2>
+                    </div>
+                </div>
+                <span class="slide-pageno">12 / 14</span>
+            </header>
+
+            <div class="slide-body">
+                <p
+                    style="
+                        font-size: 0.98rem;
+                        color: var(--fg-muted);
+                        margin: 0 0 8px;
+                        text-align: center;
+                    "
+                >
+                    كلماتٌ مألوفة لتثبيت نطق الحروف في سياقٍ طبيعي.
+                </p>
+
+                <div class="words-grid">
+                    <div class="word-tile">
+                        بَ‍<span class="haa">‍حـ</span>َثَ
+                    </div>
+                    <div class="word-tile">خَـبَـأَ</div>
+                    <div class="word-tile">أَخَـذَ</div>
+                    <div class="word-tile">
+                        <span class="haa">حـ</span>َذَرَ
+                    </div>
+                    <div class="word-tile">
+                        <span class="khaa">خـ</span>َرَجَ
+                    </div>
+
+                    <div class="word-tile">دَرَسَ</div>
+                    <div class="word-tile">
+                        شَـرَ<span class="haa">ح</span>َ
+                    </div>
+                    <div class="word-tile">
+                        ذَبَ‍<span class="haa">‍ح</span>َ
+                    </div>
+                    <div class="word-tile">
+                        <span class="haa">حـ</span>َرَثَ
+                    </div>
+                    <div class="word-tile">سَـجَـدَ</div>
+
+                    <div class="word-tile">
+                        رَجَ‍<span class="haa">‍ح</span>َ
+                    </div>
+                    <div class="word-tile">
+                        بَـذَ<span class="khaa">خ</span>َ
+                    </div>
+                    <div class="word-tile">
+                        <span class="khaa">خـ</span>َشَـبَ
+                    </div>
+                    <div class="word-tile">
+                        شَ‍<span class="haa">‍حـ</span>َذَ
+                    </div>
+                    <div class="word-tile">
+                        <span class="haa">حـ</span>َشَـدَ
+                    </div>
+                </div>
+
+                <div class="legend-row">
+                    <span class="legend-chip"
+                        ><span
+                            class="legend-chip__dot legend-chip__dot--haa"
+                        ></span>
+                        الحاء (ح)</span
+                    >
+                    <span class="legend-chip"
+                        ><span
+                            class="legend-chip__dot legend-chip__dot--khaa"
+                        ></span>
+                        الخاء (خ)</span
+                    >
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SLIDE 13: كلمات تدريبية ============ -->
+        <section class="page">
+            <header class="slide-header">
+                <div class="slide-header__left">
+                    <div class="slide-num">١٣</div>
+                    <div>
+                        <p class="slide-eyebrow">التمارين · ٢</p>
+                        <h2 class="slide-title">كلماتٌ تدريبية</h2>
+                    </div>
+                </div>
+                <span class="slide-pageno">13 / 14</span>
+            </header>
+
+            <div class="slide-body">
+                <p
+                    style="
+                        font-size: 0.98rem;
+                        color: var(--fg-muted);
+                        margin: 0 0 8px;
+                        text-align: center;
+                    "
+                >
+                    مقاطعُ غيرِ ذات معنى لتركيز الانتباه على تمييز المخارج
+                    المتقاربة.
+                </p>
+
+                <div class="words-grid">
+                    <div class="word-tile">
+                        بَـتَ‍<span class="haa">‍ح</span>َ
+                    </div>
+                    <div class="word-tile">
+                        تَـبَ‍<span class="khaa">‍خ</span>َ
+                    </div>
+                    <div class="word-tile">ثَـبَـجَ</div>
+                    <div class="word-tile">
+                        جَـبَ‍<span class="haa">‍ح</span>َ
+                    </div>
+                    <div class="word-tile">
+                        <span class="haa">حـ</span>َبَـثَ
+                    </div>
+
+                    <div class="word-tile">
+                        <span class="khaa">خـ</span>َبَـتَ
+                    </div>
+                    <div class="word-tile">
+                        بَـجَ‍<span class="haa">‍ح</span>َ
+                    </div>
+                    <div class="word-tile">
+                        تَ‍<span class="haa">‍حـ</span>َبَ
+                    </div>
+                    <div class="word-tile">
+                        ثَ‍<span class="khaa">‍خـ</span>َبَ
+                    </div>
+                    <div class="word-tile">جَـثَـبَ</div>
+
+                    <div class="word-tile">
+                        <span class="haa">حـ</span>َتَـجَ
+                    </div>
+                    <div class="word-tile">
+                        <span class="khaa">خـ</span>َجَـبَ
+                    </div>
+                    <div class="word-tile">
+                        بَـثَ‍<span class="khaa">‍خ</span>َ
+                    </div>
+                    <div class="word-tile">تَـجَـثَ</div>
+                    <div class="word-tile">
+                        ثَ‍<span class="haa">‍حـ</span>َبَ
+                    </div>
+                </div>
+
+                <div class="legend-row">
+                    <span class="legend-chip"
+                        ><span
+                            class="legend-chip__dot legend-chip__dot--haa"
+                        ></span>
+                        الحاء (ح)</span
+                    >
+                    <span class="legend-chip"
+                        ><span
+                            class="legend-chip__dot legend-chip__dot--khaa"
+                        ></span>
+                        الخاء (خ)</span
+                    >
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SLIDE 14: CLOSING ============ -->
+        <section class="page closing">
+            <div class="cover__frame"></div>
+
+            <h2 class="closing__title">تمّ بحمد الله</h2>
+            <div class="closing__rule"></div>
+            <p class="closing__text">﴿ وَرَتِّلِ الْقُرْآنَ تَرْتِيلًا ﴾</p>
+            <p class="closing__sub">أحكام التجويد — المدود وتمارين النطق</p>
+        </section>
+
+        <nav class="deck-controls" dir="ltr" aria-label="Slide controls">
+            <button
+                class="deck-button"
+                type="button"
+                data-slide-prev
+                aria-label="الشريحة السابقة"
+                title="الشريحة السابقة"
+            >
+                ›
+            </button>
+            <span class="deck-status" data-slide-status>1 / 14</span>
+            <button
+                class="deck-button"
+                type="button"
+                data-slide-next
+                aria-label="الشريحة التالية"
+                title="الشريحة التالية"
+            >
+                ‹
+            </button>
+        </nav>
+
+        <script>
+            (() => {
+                const slides = Array.from(document.querySelectorAll(".page"));
+                const prevButton = document.querySelector("[data-slide-prev]");
+                const nextButton = document.querySelector("[data-slide-next]");
+                const status = document.querySelector("[data-slide-status]");
+                let current = 0;
+                let pointerStart = null;
+
+                document.body.classList.add("deck-enhanced");
+
+                const setScale = () => {
+                    const viewport = window.visualViewport;
+                    const viewportWidth = viewport?.width || window.innerWidth;
+                    const viewportHeight =
+                        viewport?.height || window.innerHeight;
+                    const widthScale = viewportWidth / 1280;
+                    const heightScale = viewportHeight / 720;
+                    const scale = Math.max(
+                        0.18,
+                        Math.min(widthScale, heightScale)
+                    );
+
+                    document.documentElement.style.setProperty(
+                        "--deck-scale",
+                        scale.toFixed(4)
+                    );
+                };
+
+                const update = () => {
+                    slides.forEach((slide, index) => {
+                        const isActive = index === current;
+                        slide.classList.toggle("is-active", isActive);
+                        slide.classList.toggle("is-before", index < current);
+                        slide.classList.toggle("is-after", index > current);
+                        slide.setAttribute("aria-hidden", String(!isActive));
+                        slide.tabIndex = isActive ? 0 : -1;
+                    });
+
+                    status.textContent = `${current + 1} / ${slides.length}`;
+                    prevButton.disabled = current === 0;
+                    nextButton.disabled = current === slides.length - 1;
+                };
+
+                const goTo = (nextIndex) => {
+                    const boundedIndex = Math.max(
+                        0,
+                        Math.min(nextIndex, slides.length - 1)
+                    );
+
+                    if (boundedIndex === current) {
+                        return;
+                    }
+
+                    current = boundedIndex;
+                    update();
+                };
+
+                prevButton.addEventListener("click", () => goTo(current - 1));
+                nextButton.addEventListener("click", () => goTo(current + 1));
+
+                window.addEventListener("keydown", (event) => {
+                    if (
+                        event.target instanceof HTMLElement &&
+                        ["INPUT", "TEXTAREA", "SELECT"].includes(
+                            event.target.tagName
+                        )
+                    ) {
+                        return;
+                    }
+
+                    if (
+                        event.key === "ArrowLeft" ||
+                        event.key === "ArrowDown" ||
+                        event.key === "PageDown" ||
+                        event.key === " "
+                    ) {
+                        event.preventDefault();
+                        goTo(current + 1);
+                    }
+
+                    if (
+                        event.key === "ArrowRight" ||
+                        event.key === "ArrowUp" ||
+                        event.key === "PageUp"
+                    ) {
+                        event.preventDefault();
+                        goTo(current - 1);
+                    }
+
+                    if (event.key === "Home") {
+                        event.preventDefault();
+                        goTo(0);
+                    }
+
+                    if (event.key === "End") {
+                        event.preventDefault();
+                        goTo(slides.length - 1);
+                    }
+                });
+
+                window.addEventListener(
+                    "pointerdown",
+                    (event) => {
+                        pointerStart = {
+                            x: event.clientX,
+                            y: event.clientY,
+                        };
+                    },
+                    { passive: true }
+                );
+
+                window.addEventListener(
+                    "pointerup",
+                    (event) => {
+                        if (!pointerStart) {
+                            return;
+                        }
+
+                        const deltaX = event.clientX - pointerStart.x;
+                        const deltaY = event.clientY - pointerStart.y;
+                        pointerStart = null;
+
+                        if (
+                            Math.abs(deltaX) < 46 ||
+                            Math.abs(deltaX) < Math.abs(deltaY)
+                        ) {
+                            return;
+                        }
+
+                        goTo(current + (deltaX < 0 ? 1 : -1));
+                    },
+                    { passive: true }
+                );
+
+                window.addEventListener("resize", setScale);
+                window.visualViewport?.addEventListener("resize", setScale);
+                setScale();
+                update();
+            })();
+        </script>
+    </body>
+</html>
