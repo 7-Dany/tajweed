@@ -188,7 +188,7 @@ export class JsonCourseRepository implements CourseRepository {
 
   /* ───────────────────────── Courses ───────────────────────── */
 
-  listCourses(): CourseSummary[] {
+  async listCourses(): Promise<CourseSummary[]> {
     return this.data.courses.map((c) => {
       const teacher = this.findTeacher(c.teacherId)
       const chapters = [...c.chapters].sort((a, b) => a.order - b.order)
@@ -206,12 +206,12 @@ export class JsonCourseRepository implements CourseRepository {
     })
   }
 
-  getCourseBySlug(slug: string): CourseWithRelations | null {
+  async getCourseBySlug(slug: string): Promise<CourseWithRelations | null> {
     const course = this.data.courses.find((c) => c.slug === slug)
     return course ? this.toCourseWithRelations(course) : null
   }
 
-  getCourseById(id: string): CourseWithRelations | null {
+  async getCourseById(id: string): Promise<CourseWithRelations | null> {
     const course = this.data.courses.find((c) => c.id === id)
     return course ? this.toCourseWithRelations(course) : null
   }
@@ -270,7 +270,7 @@ export class JsonCourseRepository implements CourseRepository {
 
   /* ───────────────────────── Chapters ───────────────────────── */
 
-  getChapterById(chapterId: string): ChapterWithLessons | null {
+  async getChapterById(chapterId: string): Promise<ChapterWithLessons | null> {
     const found = this.findChapter(chapterId)
     return found ? this.toChapter(found.chapter) : null
   }
@@ -315,7 +315,7 @@ export class JsonCourseRepository implements CourseRepository {
 
   /* ───────────────────────── Lessons ───────────────────────── */
 
-  getLessonById(lessonId: string): LessonWithChapter | null {
+  async getLessonById(lessonId: string): Promise<LessonWithChapter | null> {
     const found = this.findLesson(lessonId)
     return found ? this.toLesson(found.lesson, found.chapter.id) : null
   }

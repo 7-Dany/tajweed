@@ -8,7 +8,7 @@ export async function GET(
   { params }: { params: Promise<{ slug: string; chapterId: string }> }
 ) {
   const { slug, chapterId } = await params
-  const course = getCourseBySlug(slug)
+  const course = await getCourseBySlug(slug)
   if (!course) {
     return NextResponse.json({ error: "Course not found" }, { status: 404 })
   }
@@ -16,7 +16,7 @@ export async function GET(
     return NextResponse.json({ error: "Chapter not found" }, { status: 404 })
   }
 
-  return NextResponse.json(getChapterById(chapterId))
+  return NextResponse.json(await getChapterById(chapterId))
 }
 
 /**
@@ -29,7 +29,7 @@ export async function PATCH(
   { params }: { params: Promise<{ slug: string; chapterId: string }> }
 ) {
   const { slug, chapterId } = await params
-  const course = getCourseBySlug(slug)
+  const course = await getCourseBySlug(slug)
   if (!course) {
     return NextResponse.json({ error: "Course not found" }, { status: 404 })
   }
@@ -43,7 +43,7 @@ export async function PATCH(
   }
 
   try {
-    const chapter = await updateChapter(chapterId, { title: body.title, order: body.order })
+    const chapter = await updateChapter(chapterId, { title: body.title, titleEn: body.titleEn, order: body.order })
     return NextResponse.json(chapter)
   } catch (err) {
     return NextResponse.json(
@@ -59,7 +59,7 @@ export async function DELETE(
   { params }: { params: Promise<{ slug: string; chapterId: string }> }
 ) {
   const { slug, chapterId } = await params
-  const course = getCourseBySlug(slug)
+  const course = await getCourseBySlug(slug)
   if (!course) {
     return NextResponse.json({ error: "Course not found" }, { status: 404 })
   }

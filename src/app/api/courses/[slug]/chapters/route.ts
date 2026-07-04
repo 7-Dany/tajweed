@@ -11,7 +11,7 @@ export async function POST(
   { params }: { params: Promise<{ slug: string }> }
 ) {
   const { slug } = await params
-  const course = getCourseBySlug(slug)
+  const course = await getCourseBySlug(slug)
   if (!course) {
     return NextResponse.json({ error: "Course not found" }, { status: 404 })
   }
@@ -22,7 +22,7 @@ export async function POST(
   }
 
   try {
-    const chapter = await createChapter(course.id, { title: body.title, order: body.order })
+    const chapter = await createChapter(course.id, { title: body.title, titleEn: body.titleEn, order: body.order })
     return NextResponse.json(chapter, { status: 201 })
   } catch (err) {
     return NextResponse.json(

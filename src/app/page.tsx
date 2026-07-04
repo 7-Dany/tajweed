@@ -1,8 +1,8 @@
 import { CourseApp } from "@/components/course/course-app"
 import { getCourses } from "@/domain/courses"
 
-export default function Page() {
-  const courses = getCourses()
+export default async function Page() {
+  const courses = await getCourses()
 
   if (courses.length === 0) {
     return (

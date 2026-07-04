@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server"
 
 import { deleteLesson, getCourseBySlug, getLessonById, updateLesson } from "@/domain/courses"
+import type { CourseWithRelations } from "@/domain/course-repository"
 
 function findLessonInCourse(
-  course: NonNullable<ReturnType<typeof getCourseBySlug>>,
+  course: CourseWithRelations,
   chapterId: string,
   lessonId: string
 ) {
@@ -19,14 +20,14 @@ export async function GET(
   { params }: { params: Promise<{ slug: string; chapterId: string; lessonId: string }> }
 ) {
   const { slug, chapterId, lessonId } = await params
-  const course = getCourseBySlug(slug)
+  const course = await getCourseBySlug(slug)
   if (!course) return NextResponse.json({ error: "Course not found" }, { status: 404 })
 
   const { chapter, lesson } = findLessonInCourse(course, chapterId, lessonId)
   if (!chapter) return NextResponse.json({ error: "Chapter not found" }, { status: 404 })
   if (!lesson) return NextResponse.json({ error: "Lesson not found" }, { status: 404 })
 
-  return NextResponse.json(getLessonById(lessonId))
+  return NextResponse.json(await getLessonById(lessonId))
 }
 
 /**
@@ -39,7 +40,7 @@ export async function PATCH(
   { params }: { params: Promise<{ slug: string; chapterId: string; lessonId: string }> }
 ) {
   const { slug, chapterId, lessonId } = await params
-  const course = getCourseBySlug(slug)
+  const course = await getCourseBySlug(slug)
   if (!course) return NextResponse.json({ error: "Course not found" }, { status: 404 })
 
   const { chapter, lesson } = findLessonInCourse(course, chapterId, lessonId)
@@ -58,7 +59,9 @@ export async function PATCH(
     const updated = await updateLesson(lessonId, {
       slug: body.slug,
       title: body.title,
+      titleEn: body.titleEn,
       description: body.description,
+      descriptionEn: body.descriptionEn,
       contentKey: body.contentKey,
       order: body.order,
       source: body.source,
@@ -79,7 +82,7 @@ export async function DELETE(
   { params }: { params: Promise<{ slug: string; chapterId: string; lessonId: string }> }
 ) {
   const { slug, chapterId, lessonId } = await params
-  const course = getCourseBySlug(slug)
+  const course = await getCourseBySlug(slug)
   if (!course) return NextResponse.json({ error: "Course not found" }, { status: 404 })
 
   const { chapter, lesson } = findLessonInCourse(course, chapterId, lessonId)

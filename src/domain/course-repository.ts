@@ -145,21 +145,21 @@ export type UpdateLessonInput = Partial<{
 
 export interface CourseRepository {
   /* Courses */
-  listCourses(): CourseSummary[]
-  getCourseBySlug(slug: string): CourseWithRelations | null
-  getCourseById(id: string): CourseWithRelations | null
+  listCourses(): Promise<CourseSummary[]>
+  getCourseBySlug(slug: string): Promise<CourseWithRelations | null>
+  getCourseById(id: string): Promise<CourseWithRelations | null>
   createCourse(teacherId: string, input: CreateCourseInput): Promise<CourseWithRelations>
   updateCourse(courseId: string, input: UpdateCourseInput): Promise<CourseWithRelations>
   deleteCourse(courseId: string): Promise<void>
 
   /* Chapters */
-  getChapterById(chapterId: string): ChapterWithLessons | null
+  getChapterById(chapterId: string): Promise<ChapterWithLessons | null>
   createChapter(courseId: string, input: CreateChapterInput): Promise<ChapterWithLessons>
   updateChapter(chapterId: string, input: UpdateChapterInput): Promise<ChapterWithLessons>
   deleteChapter(chapterId: string): Promise<void>
 
   /* Lessons */
-  getLessonById(lessonId: string): LessonWithChapter | null
+  getLessonById(lessonId: string): Promise<LessonWithChapter | null>
   createLesson(chapterId: string, input: CreateLessonInput): Promise<LessonWithChapter>
   updateLesson(lessonId: string, input: UpdateLessonInput): Promise<LessonWithChapter>
   deleteLesson(lessonId: string): Promise<void>

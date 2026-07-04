@@ -8,7 +8,7 @@ export async function GET(
   { params }: { params: Promise<{ slug: string }> }
 ) {
   const { slug } = await params
-  const course = getCourseBySlug(slug)
+  const course = await getCourseBySlug(slug)
 
   if (!course) {
     return NextResponse.json({ error: "Course not found" }, { status: 404 })
@@ -26,7 +26,7 @@ export async function PATCH(
   { params }: { params: Promise<{ slug: string }> }
 ) {
   const { slug } = await params
-  const course = getCourseBySlug(slug)
+  const course = await getCourseBySlug(slug)
   if (!course) {
     return NextResponse.json({ error: "Course not found" }, { status: 404 })
   }
@@ -40,7 +40,9 @@ export async function PATCH(
     const updated = await updateCourse(course.id, {
       slug: body.slug,
       title: body.title,
+      titleEn: body.titleEn,
       description: body.description,
+      descriptionEn: body.descriptionEn,
     })
     return NextResponse.json(updated)
   } catch (err) {
@@ -57,7 +59,7 @@ export async function DELETE(
   { params }: { params: Promise<{ slug: string }> }
 ) {
   const { slug } = await params
-  const course = getCourseBySlug(slug)
+  const course = await getCourseBySlug(slug)
   if (!course) {
     return NextResponse.json({ error: "Course not found" }, { status: 404 })
   }

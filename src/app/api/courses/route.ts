@@ -4,7 +4,7 @@ import { createCourse, getCourses } from "@/domain/courses"
 
 /** GET /api/courses — list all courses (catalog summary shape). */
 export async function GET() {
-  return NextResponse.json(getCourses())
+  return NextResponse.json(await getCourses())
 }
 
 /**
@@ -28,7 +28,9 @@ export async function POST(request: Request) {
     const course = await createCourse(body.teacherId, {
       slug: body.slug,
       title: body.title,
+      titleEn: body.titleEn,
       description: body.description,
+      descriptionEn: body.descriptionEn,
     })
     return NextResponse.json(course, { status: 201 })
   } catch (err) {
