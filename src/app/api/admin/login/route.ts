@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server"
-import { cookies } from "next/headers"
 import { createSessionToken } from "@/lib/admin-auth"
 
 export async function POST(request: Request) {
@@ -46,9 +45,9 @@ export async function POST(request: Request) {
   }
 
   const token = await createSessionToken(username)
-  const cookieStore = await cookies()
 
-  cookieStore.set("admin_session", token, {
+  const response = NextResponse.redirect(new URL("/admin/courses", request.url))
+  response.cookies.set("admin_session", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
@@ -56,5 +55,5 @@ export async function POST(request: Request) {
     maxAge: 60 * 60 * 24,
   })
 
-  return NextResponse.redirect(new URL("/admin/courses", request.url))
+  return response
 }
