@@ -9,7 +9,7 @@ import { SettingsDialog } from "@/components/settings/settings-dialog"
  */
 export function ControlsBar() {
   return (
-    <div className="fixed bottom-4 start-4 z-40">
+    <div className="fixed bottom-4 inset-s-4 z-40">
       <SettingsDialog />
     </div>
   )

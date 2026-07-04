@@ -62,7 +62,7 @@ interface SlidePageContextValue {
   total: number
 }
 
-const SlidePageContext = createContext<SlidePageContextValue | null>(null)
+export const SlidePageContext = createContext<SlidePageContextValue | null>(null)
 
 function useSlidePageContext() {
   const ctx = useContext(SlidePageContext)

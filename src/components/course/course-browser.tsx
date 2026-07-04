@@ -2,8 +2,8 @@
 
 import { IconArrowRight, IconBook, IconCheck, IconPlayerPlay } from "@tabler/icons-react"
 
-import type { CourseWithRelations, LessonWithChapter } from "@/lib/courses"
-import { useContent, useTranslations } from "@/lib/i18n"
+import type { CourseWithRelations, LessonWithChapter } from "@/domain/courses"
+import { useContent, useTranslations } from "@/translations/provider"
 
 type CourseBrowserProps = {
   course: CourseWithRelations

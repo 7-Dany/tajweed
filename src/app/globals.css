@@ -1,3 +1,27 @@
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--slide-border-strong, oklch(0.871 0.01 78));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--slide-fg-muted, oklch(0.65 0.02 78));
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--slide-border-strong, oklch(0.871 0.01 78)) transparent;
+}
+
 /* force recompile */
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -5,6 +29,13 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* Match the container-query "sm" breakpoint to the same 640px used by
+     the hand-written `@container (max-width: 640px)` rules below, and by
+     Tailwind's own (viewport) `sm:` breakpoint — so `@sm:` utilities used
+     throughout the slide components (grid-cols, flex-direction, sizing)
+     respond to the actual rendered box (real device, or the admin preview
+     frame) instead of the browser window. */
+  --container-sm: 40rem;
   --font-sans: var(--font-sans);
   --font-ar: var(--font-ar);
   --font-en: var(--font-en);
@@ -64,10 +95,10 @@
   --color-slide-madd-soft: var(--slide-madd-soft);
   --color-slide-hamza: var(--slide-hamza);
   --color-slide-hamza-soft: var(--slide-hamza-soft);
-  --color-slide-letter-haa: var(--slide-letter-haa);
-  --color-slide-letter-haa-bg: var(--slide-letter-haa-bg);
-  --color-slide-letter-khaa: var(--slide-letter-khaa);
-  --color-slide-letter-khaa-bg: var(--slide-letter-khaa-bg);
+  --color-slide-haa: var(--slide-haa);
+  --color-slide-haa-soft: var(--slide-haa-soft);
+  --color-slide-khaa: var(--slide-khaa);
+  --color-slide-khaa-soft: var(--slide-khaa-soft);
   --radius-slide: var(--slide-radius);
   --radius-slide-lg: var(--slide-radius-lg);
   --radius-slide-xl: var(--slide-radius-xl);
@@ -76,38 +107,38 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --radius: var(--slide-radius);
+  --background: var(--slide-bg);
+  --foreground: var(--slide-fg);
+  --card: var(--slide-card);
+  --card-foreground: var(--slide-fg);
+  --popover: var(--slide-card);
+  --popover-foreground: var(--slide-fg);
+  --primary: var(--slide-primary);
+  --primary-foreground: var(--slide-primary-fg);
+  --secondary: var(--slide-bg-subtle);
+  --secondary-foreground: var(--slide-fg);
+  --muted: var(--slide-bg-subtle);
+  --muted-foreground: var(--slide-fg-muted);
+  --accent: var(--slide-primary-tint);
+  --accent-foreground: var(--slide-primary);
+  --destructive: #dc2626;
+  --border: var(--slide-border);
+  --input: var(--slide-border);
+  --ring: var(--slide-primary);
+  --chart-1: var(--slide-primary);
+  --chart-2: var(--slide-accent);
+  --chart-3: var(--slide-madd);
+  --chart-4: var(--slide-hamza);
+  --chart-5: var(--slide-haa);
+  --sidebar: var(--slide-card);
+  --sidebar-foreground: var(--slide-fg);
+  --sidebar-primary: var(--slide-primary);
+  --sidebar-primary-foreground: var(--slide-primary-fg);
+  --sidebar-accent: var(--slide-primary-tint);
+  --sidebar-accent-foreground: var(--slide-primary);
+  --sidebar-border: var(--slide-border);
+  --sidebar-ring: var(--slide-primary);
 
   --slide-bg: #fbf7ee;
   --slide-bg-subtle: #f5efe0;
@@ -127,10 +158,10 @@
   --slide-madd-soft: #fce0e6;
   --slide-hamza: #15803d;
   --slide-hamza-soft: #dcfce7;
-  --slide-letter-haa: #9f1239;
-  --slide-letter-haa-bg: #fce0e6;
-  --slide-letter-khaa: #92400e;
-  --slide-letter-khaa-bg: #fef3c7;
+  --slide-haa: #9f1239;
+  --slide-haa-soft: #fce0e6;
+  --slide-khaa: #92400e;
+  --slide-khaa-soft: #fef3c7;
   --slide-radius: 10px;
   --slide-radius-lg: 14px;
   --slide-radius-xl: 20px;
@@ -142,37 +173,37 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --background: var(--slide-bg);
+  --foreground: var(--slide-fg);
+  --card: var(--slide-card);
+  --card-foreground: var(--slide-fg);
+  --popover: var(--slide-card);
+  --popover-foreground: var(--slide-fg);
+  --primary: var(--slide-primary);
+  --primary-foreground: var(--slide-primary-fg);
+  --secondary: var(--slide-bg-subtle);
+  --secondary-foreground: var(--slide-fg);
+  --muted: var(--slide-bg-subtle);
+  --muted-foreground: var(--slide-fg-muted);
+  --accent: var(--slide-primary-tint);
+  --accent-foreground: var(--slide-primary);
+  --destructive: #ef4444;
+  --border: var(--slide-border);
+  --input: var(--slide-border);
+  --ring: var(--slide-primary);
+  --chart-1: var(--slide-primary);
+  --chart-2: var(--slide-accent);
+  --chart-3: var(--slide-madd);
+  --chart-4: var(--slide-hamza);
+  --chart-5: var(--slide-haa);
+  --sidebar: var(--slide-card);
+  --sidebar-foreground: var(--slide-fg);
+  --sidebar-primary: var(--slide-primary);
+  --sidebar-primary-foreground: var(--slide-primary-fg);
+  --sidebar-accent: var(--slide-primary-tint);
+  --sidebar-accent-foreground: var(--slide-primary);
+  --sidebar-border: var(--slide-border);
+  --sidebar-ring: var(--slide-primary);
 
   /* ── Dark-mode slide palette ── */
   --slide-bg: #1a1410;
@@ -193,10 +224,10 @@
   --slide-madd-soft: #3d1620;
   --slide-hamza: #4ade80;
   --slide-hamza-soft: #16291f;
-  --slide-letter-haa: #fb7185;
-  --slide-letter-haa-bg: #3d1620;
-  --slide-letter-khaa: #fbbf24;
-  --slide-letter-khaa-bg: #3d2f0a;
+  --slide-haa: #fb7185;
+  --slide-haa-soft: #3d1620;
+  --slide-khaa: #fbbf24;
+  --slide-khaa-soft: #3d2f0a;
   --slide-shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.3);
   --slide-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3);
 }
@@ -451,8 +482,8 @@ html, body {
 
 .cover__chip-dot--madd { background: var(--slide-madd); }
 .cover__chip-dot--hamza { background: var(--slide-hamza); }
-.cover__chip-dot--haa { background: var(--slide-letter-haa); }
-.cover__chip-dot--khaa { background: var(--slide-letter-khaa); }
+.cover__chip-dot--haa { background: var(--slide-haa); }
+.cover__chip-dot--khaa { background: var(--slide-khaa); }
 .cover__chip-dot--primary { background: var(--slide-primary); }
 
 .divider {
@@ -568,12 +599,12 @@ html[dir="rtl"] .group:focus-visible .dir-arrow-back {
 }
 
 .haa {
-  color: var(--slide-letter-haa);
+  color: var(--slide-haa);
   font-weight: inherit;
 }
 
 .khaa {
-  color: var(--slide-letter-khaa);
+  color: var(--slide-khaa);
   font-weight: inherit;
 }
 
@@ -628,6 +659,12 @@ html[dir="rtl"] .group:focus-visible .dir-arrow-back {
     width: 100%;
     height: 100%;
     overflow: hidden;
+  }
+
+  /* Allow admin pages to scroll naturally */
+  html:has(body .admin-root), body:has(.admin-root) {
+    overflow: visible !important;
+    height: auto !important;
   }
 
   body {
@@ -733,7 +770,14 @@ html[dir="rtl"] .group:focus-visible .dir-arrow-back {
   }
 }
 
-@media screen and (max-width: 640px) {
+/* Named container query (matches the `@container/slide` class on the
+   deck wrapper / admin preview frame), not a viewport media query: this
+   lets the mobile layout kick in whenever the *rendered slide box* (real
+   device, or the admin preview panel) is narrow — not just when the
+   browser window is. Named explicitly so it always binds to the slide
+   wrapper itself, not some closer-nested container (e.g. shadcn's Card
+   sets up its own unnamed `@container` internally). */
+@container slide (max-width: 640px) {
   /* Hide directional arrows AND their wrappers on cards — they waste
      horizontal space on mobile. The .dir-arrow is the icon itself,
      and its parent <span> wrapper would still show as an empty box. */

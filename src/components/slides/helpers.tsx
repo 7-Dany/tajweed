@@ -1,11 +1,12 @@
 /**
  * Shared building blocks for slide decks.
  *
- * Every lesson deck (in src/data/decks/*.tsx) imports from here so that
- * the colored inline-text wrappers and slide shells stay consistent.
+ * Every lesson deck (in src/content/lessons/*.slides.ts) resolves to Slide[]
+ * data, rendered by <SlideRenderer /> (slide-renderer.tsx) using the shells
+ * and colored inline-text wrappers defined here, so markup stays consistent.
  */
 
-import type { ComponentType, ReactNode } from "react"
+import type { ReactNode } from "react"
 
 import {
   SlideBody,
@@ -25,11 +26,6 @@ import {
 } from "@/components/slides/divider"
 
 /* ───────────────────────── Types ───────────────────────── */
-
-export type SlideDefinition = {
-  Component: ComponentType
-  className?: string
-}
 
 type SlideShellProps = {
   eyebrow: string

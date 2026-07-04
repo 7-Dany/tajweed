@@ -2,8 +2,8 @@
 
 import { IconArrowRight, IconBook2, IconClipboardList, IconSchool } from "@tabler/icons-react"
 
-import type { CourseSummary } from "@/lib/courses"
-import { useContent, useTranslations } from "@/lib/i18n"
+import type { CourseSummary } from "@/domain/courses"
+import { useContent, useTranslations } from "@/translations/provider"
 
 type CourseCatalogProps = {
   courses: CourseSummary[]

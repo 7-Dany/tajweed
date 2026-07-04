@@ -11,7 +11,7 @@ import type {
   CourseSummary,
   CourseWithRelations,
   LessonWithChapter,
-} from "@/lib/courses"
+} from "@/domain/courses"
 
 // Code-split the lesson player (and its slide deck) so the catalog and
 // browser load fast. React 19 Suspense handles the loading fallback.

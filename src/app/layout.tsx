@@ -5,8 +5,8 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/providers/theme-provider"
 import { Toaster } from "@/components/ui/sonner"
 import { QueryProvider } from "@/components/providers/query-provider"
-import { I18nProvider } from "@/lib/i18n"
-import { siteConfig } from "@/data/site-config"
+import { I18nProvider } from "@/translations/provider"
+import { siteConfig } from "@/site.config"
 import { cn } from "@/lib/utils"
 
 // Arabic serif font (Amiri) — used for Arabic content + slide deck

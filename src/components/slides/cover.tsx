@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils"
+import type { LegendTone } from "@/domain/slides/schema"
 
 function CoverFrame({
   className,
@@ -107,21 +108,13 @@ function CoverNum({
   )
 }
 
-const chipDotVariants: Record<string, string> = {
-  madd: "cover__chip-dot--madd",
-  hamza: "cover__chip-dot--hamza",
-  haa: "cover__chip-dot--haa",
-  khaa: "cover__chip-dot--khaa",
-  primary: "cover__chip-dot--primary",
-}
-
 function CoverChip({
   color = "primary",
   children,
   className,
   ...props
 }: React.ComponentProps<"span"> & {
-  color?: "madd" | "hamza" | "haa" | "khaa" | "primary"
+  color?: LegendTone | "primary"
 }) {
   return (
     <span
@@ -129,7 +122,7 @@ function CoverChip({
       className={cn("cover__chip", className)}
       {...props}
     >
-      <span className={cn("cover__chip-dot", chipDotVariants[color])} />
+      <span className={cn("cover__chip-dot", `cover__chip-dot--${color}`)} />
       {children}
     </span>
   )

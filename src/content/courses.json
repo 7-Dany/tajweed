@@ -1,10 +1,12 @@
 {
-  "teacher": {
-    "id": "teacher-1",
-    "name": "الشيخ تنين",
-    "email": "teacher@tajweed.example",
-    "bio": "معلّم تجويد متخصص في أحكام المدّ ومخارج الحروف."
-  },
+  "teachers": [
+    {
+      "id": "teacher-1",
+      "name": "الشيخ تنين",
+      "email": "teacher@tajweed.example",
+      "bio": "معلّم تجويد متخصص في أحكام المدّ ومخارج الحروف."
+    }
+  ],
   "courses": [
     {
       "id": "course-tajweed-rules",
@@ -21,10 +23,29 @@
             {
               "id": "lesson-madd-rules",
               "slug": "madd-rules",
+              "titleEn": "Rules of Madd (Elongation)",
               "title": "أحكام المد الطبيعي والفرعي",
               "description": "حروف المدّ الثلاثة، شروطها، المدّ الطبيعي والفرعي بسبب الهمزة، مع أمثلة قرآنية مُلوَّنة.",
               "contentKey": "madd-rules",
-              "order": 1
+              "order": 1,
+              "source": {
+                "type": "markdown-file",
+                "file": "madd-rules.md",
+                "fileEn": "madd-rules.en.md"
+              }
+            },
+            {
+              "id": "lesson-نون-وتنوين",
+              "slug": "نون-وتنوين",
+              "title": "نون وتنوين",
+              "description": "",
+              "contentKey": "tanwen",
+              "order": 2,
+              "source": {
+                "type": "markdown-i18n",
+                "ar": "```yaml\nlesson: new-lesson\nlanguage: ar\n```\n\n```yaml\nkind: cover\ntitle: عنوان الدرس\nsubtitle: وصف مختصر للدرس\n```\n\n---\n\n```yaml\nkind: content\neyebrow: القسم الأول\ntitle: عنوان الشريحة\n```\n\nاكتب فقرة المحتوى هنا. يمكنك تمييز جزء من النص باستخدام [em]نص مميز[/em].\n",
+                "en": "```yaml\nlesson: new-lesson\nlanguage: en\n```\n\n```yaml\nkind: cover\ntitle: Lesson Title\nsubtitle: A short description of the lesson\n```\n\n---\n\n```yaml\nkind: content\neyebrow: Part One\ntitle: Slide Title\n```\n\nWrite the slide content here. You can highlight part of the text using [em]emphasized text[/em].\n"
+              }
             }
           ]
         },
@@ -36,10 +57,16 @@
             {
               "id": "lesson-letter-practice",
               "slug": "letter-practice",
+              "titleEn": "Distinguishing Haa (ح) and Khaa (خ)",
               "title": "تمييز الحاء والخاء",
               "description": "كلماتٌ ذات معنى وكلماتٌ تدريبية لتمييز مخرجَي الحاء والخاء المتقاربَين.",
               "contentKey": "letter-practice",
-              "order": 1
+              "order": 1,
+              "source": {
+                "type": "markdown-file",
+                "file": "letter-practice.md",
+                "fileEn": "letter-practice.en.md"
+              }
             }
           ]
         }
@@ -60,10 +87,16 @@
             {
               "id": "lesson-nun-overview",
               "slug": "nun-sakinah-overview",
+              "titleEn": "Rules of Silent Noon (نْ)",
               "title": "نظرة عامة على الأحكام",
               "description": "تعريف بأحكام النون الساكنة والتنوين الأربعة مع أمثلة قرآنية مُلوَّنة.",
               "contentKey": "nun-sakinah",
-              "order": 1
+              "order": 1,
+              "source": {
+                "type": "markdown-file",
+                "file": "nun-sakinah.md",
+                "fileEn": "nun-sakinah.en.md"
+              }
             }
           ]
         }

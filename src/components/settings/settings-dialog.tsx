@@ -24,9 +24,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { useI18n, useTranslations } from "@/lib/i18n"
+import { useI18n, useTranslations } from "@/translations/provider"
 import { useIsSmallScreen } from "@/hooks/use-is-small-screen"
-import { LOCALES, LOCALE_META, type Locale } from "@/content/texts"
+import { LOCALES, LOCALE_META, type Locale } from "@/translations/strings"
 
 type SettingsTab = "language" | "theme"
 

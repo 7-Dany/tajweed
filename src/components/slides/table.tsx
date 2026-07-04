@@ -30,9 +30,9 @@ function Table({
     <table
       data-slot="summary-table"
       className={cn(
-        "w-full border-collapse text-start text-sm sm:text-lg",
-        "[&_thead_th]:bg-slide-primary [&_thead_th]:p-2.5 [&_thead_th]:text-start [&_thead_th]:text-xs [&_thead_th]:font-bold [&_thead_th]:text-slide-primary-fg sm:[&_thead_th]:p-4 sm:[&_thead_th]:text-base",
-        "[&_tbody_td]:border-b [&_tbody_td]:border-slide-border [&_tbody_td]:px-2.5 [&_tbody_td]:py-2.5 [&_tbody_td]:text-slide-fg-muted sm:[&_tbody_td]:px-5.5 sm:[&_tbody_td]:py-4.5",
+        "w-full border-collapse text-start text-sm @sm/slide:text-lg",
+        "[&_thead_th]:bg-slide-primary [&_thead_th]:p-2.5 [&_thead_th]:text-start [&_thead_th]:text-xs [&_thead_th]:font-bold [&_thead_th]:text-slide-primary-fg @sm/slide:[&_thead_th]:p-4 @sm/slide:[&_thead_th]:text-base",
+        "[&_tbody_td]:border-b [&_tbody_td]:border-slide-border [&_tbody_td]:px-2.5 [&_tbody_td]:py-2.5 [&_tbody_td]:text-slide-fg-muted @sm/slide:[&_tbody_td]:px-5.5 @sm/slide:[&_tbody_td]:py-4.5",
         "[&_tbody_tr:last-child_td]:border-b-0",
         "[&_tbody_td:first-child]:font-bold [&_tbody_td:first-child]:text-slide-fg",
         className

@@ -4,10 +4,11 @@ import { useCallback, useState } from "react"
 import { IconArrowRight, IconX } from "@tabler/icons-react"
 
 import { SlideDeck } from "@/components/slides/slide"
+import { SlideRenderer, slideToClassName } from "@/components/slides/slide-renderer"
 import { ControlsBar } from "@/components/settings/controls-bar"
-import { getDeck } from "@/data/decks"
-import { useI18n, useTranslations } from "@/lib/i18n"
-import type { LessonWithChapter } from "@/lib/courses"
+import { resolveLessonSlides } from "@/domain/slides/source"
+import { useI18n, useTranslations } from "@/translations/provider"
+import type { LessonWithChapter } from "@/domain/courses"
 
 type LessonPlayerProps = {
   lesson: LessonWithChapter
@@ -21,7 +22,11 @@ export function LessonPlayer({
   onComplete,
 }: LessonPlayerProps) {
   const { locale } = useI18n()
-  const deck = getDeck(lesson.contentKey, locale)
+  // Every lesson now carries an explicit markdown `source` (courses.json +
+  // domain/courses.ts resolve .md files on disk into one) — the old
+  // contentKey/static-deck fallback has been removed (refactor-issues/
+  // 05-migrate-remaining-decks.md, 07-markdown-parser.md).
+  const slides = lesson.source ? resolveLessonSlides(lesson.source, locale) : null
   const [hasMarkedComplete, setHasMarkedComplete] = useState(false)
   const t = useTranslations()
 
@@ -37,7 +42,7 @@ export function LessonPlayer({
   )
 
   // Deck not found — show a friendly error
-  if (!deck) {
+  if (!slides) {
     return (
       <div
         className="flex min-h-screen flex-col items-center justify-center gap-4 p-8 text-center"
@@ -57,13 +62,13 @@ export function LessonPlayer({
   }
 
   return (
-    <div className="relative h-screen w-full overflow-hidden">
+    <div className="@container/slide relative h-screen w-full overflow-hidden">
       <SlideDeck
-        slideClasses={deck.map((slide) => slide.className)}
+        slideClasses={slides.map((slide) => slideToClassName(slide))}
         onSlideChange={handleSlideChange}
       >
-        {deck.map(({ Component }, i) => (
-          <Component key={i} />
+        {slides.map((slide, i) => (
+          <SlideRenderer key={i} slide={slide} />
         ))}
       </SlideDeck>
 

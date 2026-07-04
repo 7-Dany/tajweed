@@ -1,7 +1,7 @@
 /**
- * Lightweight i18n — React context backed by src/content/texts.ts.
+ * Lightweight i18n — React context backed by src/translations/strings.ts.
  *
- * All translatable strings live in src/content/texts.ts. This module
+ * All translatable strings live in src/translations/strings.ts. This module
  * provides the React context, the useI18n/useTranslations hooks, and a
  * translateContent() helper for DB-backed content (courses/chapters/lessons).
  *
@@ -27,7 +27,7 @@ import {
   UI_TEXT,
   translateContent as doTranslate,
   type Locale,
-} from "@/content/texts"
+} from "@/translations/strings"
 
 const STORAGE_KEY = "tajweed-locale"
 
@@ -118,5 +118,5 @@ export function useContent() {
 }
 
 /** Re-export for components that need the type or metadata. */
-export type { Locale } from "@/content/texts"
-export { LOCALE_DIR, LOCALE_META, LOCALES } from "@/content/texts"
+export type { Locale } from "@/translations/strings"
+export { LOCALE_DIR, LOCALE_META, LOCALES } from "@/translations/strings"
