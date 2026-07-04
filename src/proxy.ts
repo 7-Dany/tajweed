@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
-import { createHmac } from "node:crypto"
+import { verifySessionToken } from "@/lib/admin-auth"
 
 const PUBLIC_ADMIN_PATHS = ["/admin/login", "/admin/login/", "/api/admin/login"]
 
@@ -36,30 +36,4 @@ function redirectToLogin(request: NextRequest) {
   const loginUrl = new URL("/admin/login", request.url)
   loginUrl.searchParams.set("redirect", request.nextUrl.pathname)
   return NextResponse.redirect(loginUrl)
-}
-
-const SESSION_DURATION_MS = 24 * 60 * 60 * 1000
-
-async function verifySessionToken(token: string): Promise<string | null> {
-  const parts = token.split(".")
-  if (parts.length !== 2) return null
-
-  try {
-    const payloadStr = Buffer.from(parts[0], "base64url").toString("utf-8")
-    const expectedSig = parts[1]
-
-    const secret = process.env.ADMIN_JWT_SECRET ?? "fallback-dev-secret-change-me"
-    const sig = createHmac("sha256", secret)
-      .update(payloadStr)
-      .digest("base64url")
-
-    if (sig !== expectedSig) return null
-
-    const payload = JSON.parse(payloadStr)
-    if (Date.now() > payload.exp) return null
-
-    return payload.username as string
-  } catch {
-    return null
-  }
 }
