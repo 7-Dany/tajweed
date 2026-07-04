@@ -3,9 +3,29 @@ import { cookies } from "next/headers"
 import { createSessionToken } from "@/lib/admin-auth"
 
 export async function POST(request: Request) {
-  const body = await request.json().catch(() => null)
-  if (!body || typeof body.username !== "string" || typeof body.password !== "string") {
-    return NextResponse.json({ error: "Expected { username, password }" }, { status: 400 })
+  const contentType = request.headers.get("content-type") ?? ""
+
+  let username: string | null = null
+  let password: string | null = null
+
+  if (contentType.includes("application/json")) {
+    const body = await request.json().catch(() => null)
+    username = body?.username ?? null
+    password = body?.password ?? null
+  } else {
+    const form = await request.formData().catch(() => null)
+    username = (form?.get("username") as string | null) ?? null
+    password = (form?.get("password") as string | null) ?? null
+  }
+
+  if (!username || !password) {
+    return new NextResponse(
+      `<html dir="rtl"><body style="font-family:sans-serif;padding:2rem">
+        <p>اسم المستخدم وكلمة المرور مطلوبان</p>
+        <a href="/admin/login">العودة</a>
+      </body></html>`,
+      { status: 400, headers: { "Content-Type": "text/html" } }
+    )
   }
 
   const expectedUsername = process.env.ADMIN_USERNAME
@@ -15,11 +35,17 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Admin credentials not configured" }, { status: 500 })
   }
 
-  if (body.username !== expectedUsername || body.password !== expectedPassword) {
-    return NextResponse.json({ error: "Invalid credentials" }, { status: 401 })
+  if (username !== expectedUsername || password !== expectedPassword) {
+    return new NextResponse(
+      `<html dir="rtl"><body style="font-family:sans-serif;padding:2rem">
+        <p>بيانات الدخول غير صحيحة</p>
+        <a href="/admin/login">العودة</a>
+      </body></html>`,
+      { status: 401, headers: { "Content-Type": "text/html" } }
+    )
   }
 
-  const token = await createSessionToken(body.username)
+  const token = await createSessionToken(username)
   const cookieStore = await cookies()
 
   cookieStore.set("admin_session", token, {
@@ -27,8 +53,8 @@ export async function POST(request: Request) {
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
     path: "/",
-    maxAge: 60 * 60 * 24, // 24 hours
+    maxAge: 60 * 60 * 24,
   })
 
-  return NextResponse.json({ success: true })
+  return NextResponse.redirect(new URL("/admin/courses", request.url))
 }
