@@ -46,7 +46,7 @@ export async function POST(request: Request) {
 
   const token = await createSessionToken(username)
 
-  const response = NextResponse.redirect(new URL("/admin/courses", request.url))
+  const response = NextResponse.redirect(new URL("/admin/courses", request.url), 303)
   response.cookies.set("admin_session", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
