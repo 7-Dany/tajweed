@@ -91,23 +91,6 @@ function CoverMeta({
   )
 }
 
-/** Big accent-colored number (matches the divider slide style). */
-function CoverNum({
-  className,
-  children,
-  ...props
-}: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="cover-num"
-      className={cn("cover__num", className)}
-      {...props}
-    >
-      {children}
-    </div>
-  )
-}
-
 function CoverChip({
   color = "primary",
   children,
@@ -128,4 +111,4 @@ function CoverChip({
   )
 }
 
-export { CoverFrame, CoverEyebrow, CoverTitle, CoverRule, CoverSubtitle, CoverMeta, CoverChip, CoverNum }
+export { CoverFrame, CoverEyebrow, CoverTitle, CoverRule, CoverSubtitle, CoverMeta, CoverChip }

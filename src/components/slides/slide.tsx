@@ -356,11 +356,9 @@ const SlideTitle = memo(function SlideTitle({
 export {
   SlideDeck,
   SlidePage,
-  useSlideDeck,
   SlideHeader,
   SlideHeaderLeft,
   SlideBody,
-  SlideNum,
   SlidePageno,
   SlideEyebrow,
   SlideTitle,

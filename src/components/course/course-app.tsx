@@ -3,6 +3,7 @@
 import { lazy, Suspense, useCallback, useState, useTransition } from "react"
 import { useQuery } from "@tanstack/react-query"
 
+import { Skeleton } from "@/components/ui/skeleton"
 import { CourseBrowser } from "@/components/course/course-browser"
 import { CourseCatalog } from "@/components/course/course-catalog"
 import { ControlsBar } from "@/components/settings/controls-bar"
@@ -75,8 +76,23 @@ export function CourseApp({ courses }: CourseAppProps) {
     return (
       <Suspense
         fallback={
-          <div className="grid min-h-screen place-items-center bg-[var(--slide-bg)]">
-            <div className="size-10 animate-spin rounded-full border-4 border-[var(--slide-primary-soft)] border-t-[var(--slide-primary)]" />
+          <div className="flex min-h-screen flex-col" style={{ background: "var(--slide-bg)" }}>
+            <div className="flex items-center justify-between border-b border-[var(--slide-border)] px-4 py-3">
+              <Skeleton className="h-8 w-24 rounded-full" style={{ background: "var(--slide-bg-subtle)" }} />
+              <Skeleton className="size-8 rounded-full" style={{ background: "var(--slide-bg-subtle)" }} />
+            </div>
+            <div className="flex flex-1 items-center justify-center p-8">
+              <div className="w-full max-w-2xl space-y-6">
+                <Skeleton className="h-10 w-3/4 rounded-lg" style={{ background: "var(--slide-bg-subtle)" }} />
+                <Skeleton className="h-5 w-1/2 rounded-md" style={{ background: "var(--slide-bg-subtle)" }} />
+                <Skeleton className="h-64 w-full rounded-2xl" style={{ background: "var(--slide-bg-subtle)" }} />
+                <div className="flex justify-center gap-2">
+                  <Skeleton className="size-3 rounded-full" style={{ background: "var(--slide-bg-subtle)" }} />
+                  <Skeleton className="size-3 rounded-full" style={{ background: "var(--slide-bg-subtle)" }} />
+                  <Skeleton className="size-3 rounded-full" style={{ background: "var(--slide-bg-subtle)" }} />
+                </div>
+              </div>
+            </div>
           </div>
         }
       >

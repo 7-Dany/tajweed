@@ -6,6 +6,7 @@ import { toast } from "sonner"
 import { IconBook2, IconClipboardList, IconDotsVertical, IconPencil, IconPlus, IconTrash } from "@tabler/icons-react"
 
 import { Button } from "@/components/ui/button"
+import { Skeleton } from "@/components/ui/skeleton"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -87,7 +88,23 @@ export default function AdminCoursesPage() {
       </div>
 
       {isLoading ? (
-        <p className="py-8 text-center text-muted-foreground">جارٍ التحميل...</p>
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="flex flex-col gap-4 rounded-2xl border border-border bg-card p-6">
+              <div className="flex items-start justify-between">
+                <Skeleton className="size-12 rounded-xl" />
+                <Skeleton className="size-8 rounded-lg" />
+              </div>
+              <Skeleton className="h-7 w-3/4" />
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-4 w-1/2" />
+              <div className="mt-auto flex items-center gap-4 border-t border-border pt-4">
+                <Skeleton className="h-4 w-20" />
+                <Skeleton className="h-4 w-32" />
+              </div>
+            </div>
+          ))}
+        </div>
       ) : !courses || courses.length === 0 ? (
         <p className="rounded-2xl border border-dashed border-border p-8 text-center text-muted-foreground">
           لا توجد دورات بعد

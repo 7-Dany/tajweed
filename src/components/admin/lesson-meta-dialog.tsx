@@ -1,7 +1,6 @@
 "use client"
 
-import { useForm, type Resolver } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { z } from "zod"
 
@@ -11,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Field, FieldContent, FieldError, FieldLabel } from "@/components/ui/field"
 import { slugify } from "@/lib/slugify"
-import { optionalOrderField } from "@/lib/admin-schema-helpers"
+import { optionalOrderField, createFormResolver } from "@/lib/admin-schema-helpers"
 import { useUpdateLesson } from "@/hooks/use-admin-data"
 import type { LessonWithChapter } from "@/domain/course-repository"
 
@@ -44,7 +43,7 @@ export function LessonMetaDialog({
 }) {
   const updateLesson = useUpdateLesson(courseSlug)
   const form = useForm<FormValues>({
-    resolver: zodResolver(lessonMetaSchema) as unknown as Resolver<FormValues>,
+    resolver: createFormResolver(lessonMetaSchema),
     defaultValues: {
       title: lesson.title,
       titleEn: lesson.titleEn ?? "",

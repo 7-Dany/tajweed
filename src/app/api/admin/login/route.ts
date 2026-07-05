@@ -18,13 +18,7 @@ export async function POST(request: Request) {
   }
 
   if (!username || !password) {
-    return new NextResponse(
-      `<html dir="rtl"><body style="font-family:sans-serif;padding:2rem">
-        <p>اسم المستخدم وكلمة المرور مطلوبان</p>
-        <a href="/admin/login">العودة</a>
-      </body></html>`,
-      { status: 400, headers: { "Content-Type": "text/html" } }
-    )
+    return NextResponse.json({ error: "اسم المستخدم وكلمة المرور مطلوبان" }, { status: 400 })
   }
 
   const expectedUsername = process.env.ADMIN_USERNAME
@@ -35,18 +29,12 @@ export async function POST(request: Request) {
   }
 
   if (username !== expectedUsername || password !== expectedPassword) {
-    return new NextResponse(
-      `<html dir="rtl"><body style="font-family:sans-serif;padding:2rem">
-        <p>بيانات الدخول غير صحيحة</p>
-        <a href="/admin/login">العودة</a>
-      </body></html>`,
-      { status: 401, headers: { "Content-Type": "text/html" } }
-    )
+    return NextResponse.json({ error: "بيانات الدخول غير صحيحة" }, { status: 401 })
   }
 
   const token = await createSessionToken(username)
 
-  const response = NextResponse.redirect(new URL("/admin/courses", request.url), 303)
+  const response = NextResponse.json({ ok: true }, { status: 200 })
   response.cookies.set("admin_session", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",

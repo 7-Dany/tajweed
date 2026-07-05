@@ -22,7 +22,7 @@ import type {
   UpdateLessonInput,
 } from "@/domain/courses"
 
-export class ApiError extends Error {}
+class ApiError extends Error {}
 
 async function request<T>(url: string, init?: RequestInit): Promise<T> {
   const res = await fetch(url, {

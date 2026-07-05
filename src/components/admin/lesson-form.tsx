@@ -1,8 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { useForm, type Resolver } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { z } from "zod"
 
@@ -11,7 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Field, FieldContent, FieldError, FieldLabel } from "@/components/ui/field"
 import { DEFAULT_LESSON_MARKDOWN } from "@/components/admin/default-lesson-markdown"
-import { optionalOrderField } from "@/lib/admin-schema-helpers"
+import { optionalOrderField, createFormResolver } from "@/lib/admin-schema-helpers"
 import { parseMarkdownLesson } from "@/domain/slides/markdown-parser"
 
 const lessonMetaSchema = z.object({
@@ -22,7 +21,7 @@ const lessonMetaSchema = z.object({
   order: optionalOrderField,
 })
 
-export type LessonMetaValues = z.infer<typeof lessonMetaSchema>
+type LessonMetaValues = z.infer<typeof lessonMetaSchema>
 
 export function LessonForm({
   defaultValues,
@@ -40,7 +39,7 @@ export function LessonForm({
   onSubmit: (values: LessonMetaValues, markdown: string, markdownEn?: string) => void
 }) {
   const form = useForm<LessonMetaValues>({
-    resolver: zodResolver(lessonMetaSchema) as unknown as Resolver<LessonMetaValues>,
+    resolver: createFormResolver(lessonMetaSchema),
     defaultValues: {
       title: "",
       slug: "",

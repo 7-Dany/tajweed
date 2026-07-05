@@ -1,13 +1,12 @@
 "use client"
 
-import { useForm, type Resolver } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Field, FieldContent, FieldError, FieldLabel } from "@/components/ui/field"
-import { optionalOrderField } from "@/lib/admin-schema-helpers"
+import { optionalOrderField, createFormResolver } from "@/lib/admin-schema-helpers"
 
 const chapterSchema = z.object({
   title: z.string().min(1, "العنوان مطلوب"),
@@ -29,7 +28,7 @@ export function ChapterForm({
   onSubmit: (values: ChapterFormValues) => void
 }) {
   const form = useForm<ChapterFormValues>({
-    resolver: zodResolver(chapterSchema) as unknown as Resolver<ChapterFormValues>,
+    resolver: createFormResolver(chapterSchema),
     defaultValues: { title: "", titleEn: "", ...defaultValues },
   })
 

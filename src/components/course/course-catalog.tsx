@@ -2,6 +2,7 @@
 
 import { IconArrowRight, IconBook2, IconClipboardList, IconSchool } from "@tabler/icons-react"
 
+import { Skeleton } from "@/components/ui/skeleton"
 import type { CourseSummary } from "@/domain/courses"
 import { useContent, useTranslations } from "@/translations/provider"
 
@@ -98,14 +99,32 @@ export function CourseCatalog({
         )}
       </div>
 
-      {/* ── Loading overlay ── */}
+      {/* ── Loading skeleton ── */}
       {loading && (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-[color-mix(in_srgb,var(--slide-bg)_80%,transparent)] backdrop-blur-sm">
-          <div className="flex flex-col items-center gap-3">
-            <div className="size-10 animate-spin rounded-full border-4 border-[var(--slide-primary-soft)] border-t-[var(--slide-primary)]" />
-            <p className="text-sm font-bold text-[var(--slide-fg-muted)]">
-              {t("catalog.loading")}
-            </p>
+        <div className="fixed inset-0 z-50 bg-[color-mix(in_srgb,var(--slide-bg)_80%,transparent)] backdrop-blur-sm">
+          <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
+            <div className="mb-8 flex flex-col items-center gap-3 sm:mb-12">
+              <Skeleton className="h-7 w-32 rounded-full" style={{ background: "var(--slide-bg-subtle)" }} />
+              <Skeleton className="h-10 w-64 rounded-lg" style={{ background: "var(--slide-bg-subtle)" }} />
+              <Skeleton className="h-5 w-80 rounded-md" style={{ background: "var(--slide-bg-subtle)" }} />
+            </div>
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              {Array.from({ length: 4 }).map((_, i) => (
+                <div key={i} className="flex flex-col gap-4 rounded-2xl border border-[var(--slide-border)] bg-[var(--slide-card)] p-6">
+                  <div className="flex items-start justify-between">
+                    <Skeleton className="size-12 rounded-xl" style={{ background: "var(--slide-bg-subtle)" }} />
+                    <Skeleton className="size-6" style={{ background: "var(--slide-bg-subtle)" }} />
+                  </div>
+                  <Skeleton className="h-7 w-3/4 rounded-md" style={{ background: "var(--slide-bg-subtle)" }} />
+                  <Skeleton className="h-4 w-full rounded-md" style={{ background: "var(--slide-bg-subtle)" }} />
+                  <Skeleton className="h-4 w-1/2 rounded-md" style={{ background: "var(--slide-bg-subtle)" }} />
+                  <div className="mt-auto flex items-center gap-4 border-t border-[var(--slide-border)] pt-4">
+                    <Skeleton className="h-4 w-20 rounded-md" style={{ background: "var(--slide-bg-subtle)" }} />
+                    <Skeleton className="h-4 w-32 rounded-md" style={{ background: "var(--slide-bg-subtle)" }} />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       )}
